@@ -50,28 +50,21 @@ public class Pelicula {
     @Column(name = "director", length = 255, nullable = false)
     private String director;
 
-    @ManyToMany(mappedBy = "peliculas")
-    private List<Infocast> infocasts;
+    // --Relaciones y sus atributos
+
+    @ManyToMany // aqui si es la tabla
+    @JoinTable(name = "peliculas_infocasts", joinColumns = @JoinColumn(name = "pelicula_id"), inverseJoinColumns = @JoinColumn(name = "infocast_id"))
+    private List<Infocast> infocasts_peliculas;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_peliculasdestacas_id")
     private PeliculaDestacada peliculasDestacadas;
 
-    // @OneToOne(mappedBy = "peliculas", cascade = CascadeType.ALL)
-    // private PeliculaDestacada peliculasDestacadas;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_peliculasnovedosas_id")
     private PeliculaNovedosa peliculasNovedades;
 
-    // @OneToOne
-    // @JoinColumn(name = "fk_peliculas_id")
-    // private PeliculasDestacadas peliculasDestacadas;
-
-    // @OneToMany(cascade = CascadeType.ALL)
-    // @JoinColumn(name = "pelicula_id")
-
-    // private List<InfoCast> cast;
+    // --Fin relaciones
 
     public Pelicula(String url, String imgURL, String title, String description,
             Integer yearFilm, Integer duration, String director, List<Infocast> infocasts) {
@@ -83,7 +76,7 @@ public class Pelicula {
         this.yearFilm = yearFilm;
         this.duration = duration;
         this.director = director;
-        this.infocasts = infocasts;
+        this.infocasts_peliculas = infocasts;
     }
 
     public long getId() {
@@ -151,11 +144,11 @@ public class Pelicula {
     }
 
     public List<Infocast> getInfocast() {
-        return this.infocasts;
+        return this.infocasts_peliculas;
     }
 
     public void setInfocast(List<Infocast> infocasts) {
-        this.infocasts = infocasts;
+        this.infocasts_peliculas = infocasts;
     }
 
 }

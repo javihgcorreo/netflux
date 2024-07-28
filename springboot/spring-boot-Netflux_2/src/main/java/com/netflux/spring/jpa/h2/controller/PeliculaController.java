@@ -94,46 +94,6 @@ public class PeliculaController {
         }
     }
 
-    // @GetMapping("/peliculas")
-    // public ResponseEntity<List<InfoPelicula>> getAllPeliculas() {
-    // try {
-    // List<InfoPelicula> peliculas = new ArrayList<InfoPelicula>();
-    // peliculas = peliculaService.getAllPeliculas();
-
-    // if (peliculas.isEmpty()) {
-    // return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    // }
-
-    // return new ResponseEntity<>(peliculas, HttpStatus.OK);
-    // } catch (Exception e) {
-
-    // return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-    // }
-    // }
-
-    // @GetMapping("/peliculas/novedades")
-    // public ResponseEntity<List<Pelicula>> getAllPeliculasNew() {
-    // try {
-    // List<Pelicula> peliculas = new ArrayList<Pelicula>();
-
-    // // Obtener la fecha actual
-    // LocalDate fechaActual = LocalDate.now();
-
-    // // Obtener el año
-    // int anio = fechaActual.getYear();
-
-    // peliculaRepository.findByYearFilm(anio).forEach(peliculas::add);
-
-    // if (peliculas.isEmpty()) {
-    // return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    // }
-
-    // return new ResponseEntity<>(peliculas, HttpStatus.OK);
-    // } catch (Exception e) {
-    // return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-    // }
-    // }
-
     // @GetMapping("/peliculas/{id}")
     // public ResponseEntity<List<Pelicula>> getPeliculasById(@PathVariable String
     // id) {
@@ -154,17 +114,11 @@ public class PeliculaController {
     // }
     // }
 
-    // @GetMapping("/peliculas/{id}")
-    // public ResponseEntity<Pelicula> getPeliculaById(@PathVariable("id") long id)
-    // {
-    // Optional<Pelicula> peliculaData = peliculaRepository.findById(id);
-
-    // if (peliculaData.isPresent()) {
-    // return new ResponseEntity<>(peliculaData.get(), HttpStatus.OK);
-    // } else {
-    // return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    // }
-    // }
+    @GetMapping("/peliculas/{id}")
+    public ResponseEntity<Pelicula> getPeliculaById(@PathVariable("id") long id) {
+        Pelicula peliculaData = peliculaService.getPeliculaById(id);
+        return new ResponseEntity<>(peliculaData, HttpStatus.OK);
+    }
 
     /*
      * @PostMapping("/peliculas")

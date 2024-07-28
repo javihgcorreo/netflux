@@ -49,11 +49,13 @@ public class Serie {
     @Column(name = "seasons", nullable = false)
     private Integer seasons;
 
-    // @OneToMany(cascade = CascadeType.ALL)
-    // @JoinColumn(name = "serie_id")
+    // ---Relaciones y sus
+    // atributos-------------------------------------------------------------------------
 
-    @ManyToMany(mappedBy = "series")
-    private List<Infocast> infocasts;
+    @ManyToMany(mappedBy = "series_infocasts") // se pone el nombre del atributo en la clase model (en este caso
+                                               // series), no
+    // dela tabla
+    private List<Infocast> series_infocasts;
 
     @ManyToMany(mappedBy = "series")
     private List<Creator> creators;
@@ -62,7 +64,8 @@ public class Serie {
     @JoinColumn(name = "fk_series_id")
     private SerieDestacada seriesDestacadas;
 
-    // private List<InfoCast> cast;
+    // ---Fin
+    // relaciones----------------------------------------------------------------
 
     public Serie(String url, String imgURL, String title, String description,
             Integer yearstart, Integer yearend, Integer seasons, String creators, List<Infocast> infocasts) {
@@ -74,7 +77,7 @@ public class Serie {
         this.yearstart = yearstart;
         this.yearend = yearend;
         this.seasons = seasons;
-        this.infocasts = infocasts;
+        this.series_infocasts = infocasts;
     }
 
     public long getId() {
