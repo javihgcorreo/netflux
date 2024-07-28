@@ -206,7 +206,16 @@ foreign key (infocast_id) references infocast(id)
 );
 
 
-INSERT INTO series_infocast (series_id, infocast_id)
+No es este es con ese INSERT INTO series_infocast (series_id, infocast_id)
+VALUES
+  (1, 15),
+  (1, 16),
+  (1, 17),
+  (2, 22),
+  (2, 10),
+  (2, 28);
+
+  INSERT INTO series_infocasts(series_id, infocast_id)
 VALUES
   (1, 15),
   (1, 16),

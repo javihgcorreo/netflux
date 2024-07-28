@@ -15,17 +15,7 @@ public interface SerieRepository extends JpaRepository<Serie, Long> {
     // List<Serie> findByPublished(boolean published);
 
     // @Query("SELECT * FROM Serie p")
-    List<Serie> findAll();
-
-    // String getSeriesHola();
-
-    // List<Serie> findById(long id);
-
-    List<Serie> findByTitleContainingIgnoreCase(String title);
-
-    List<Serie> findByYearendIsNull();
-
-    List<Serie> findById(Integer id);
+    // List<Serie> findAll();
 
     // String texto = "Lo que devuelvo";
 

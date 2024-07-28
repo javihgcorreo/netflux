@@ -115,7 +115,7 @@ public class InfoDestacadoService {
                                         infoDestacado.setUrl(serie.getUrl());
                                         infoDestacado.setType("serie");
                                         infoDestacado.setTitle(serie.getTitle());
-                                        infoDestacado.setImgURL(serie.getImgUrl());
+                                        infoDestacado.setImgURL(serie.getImgURL());
 
                                         // ... mapear otros campos
                                         return infoDestacado;

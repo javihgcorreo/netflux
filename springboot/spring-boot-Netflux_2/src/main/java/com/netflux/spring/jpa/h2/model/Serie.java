@@ -67,18 +67,20 @@ public class Serie {
     // ---Fin
     // relaciones----------------------------------------------------------------
 
-    public Serie(String url, String imgURL, String title, String description,
-            Integer yearstart, Integer yearend, Integer seasons, String creators, List<Infocast> infocasts) {
-        // this.id = id;
-        this.url = url;
-        this.imgURL = imgURL;
-        this.title = title;
-        this.description = description;
-        this.yearstart = yearstart;
-        this.yearend = yearend;
-        this.seasons = seasons;
-        this.series_infocasts = infocasts;
-    }
+    // public Serie(String url, String imgURL, String title, String description,
+    // Integer yearstart, Integer yearend, Integer seasons, List<Infocast>
+    // infocasts, List<Creator> creators) {
+    // // this.id = id;
+    // this.url = url;
+    // this.imgURL = imgURL;
+    // this.title = title;
+    // this.description = description;
+    // this.yearstart = yearstart;
+    // this.yearend = yearend;
+    // this.seasons = seasons;
+    // this.series_infocasts = infocasts;
+    // this.creators = creators;
+    // }
 
     public long getId() {
         return id;
@@ -92,11 +94,11 @@ public class Serie {
         this.url = url;
     }
 
-    public String getImgUrl() {
+    public String getImgURL() {
         return imgURL;
     }
 
-    public void setImgUrl(String imgURL) {
+    public void setImgURL(String imgURL) {
         this.imgURL = imgURL;
     }
 
@@ -140,28 +142,20 @@ public class Serie {
         this.seasons = seasons;
     }
 
-    @Override
-    public String toString() {
-        return "Serie{" +
-                "id='" + id + '\'' +
-                ", url='" + url + '\'' +
-                ", imgURL='" + imgURL + '\'' +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", yearStart=" + yearstart +
-                ", yearEnd=" + yearend +
-                ", seasons=" + seasons +
-                // ", cast=" + cast +
-                '}';
+    public List<Infocast> getInfocast() {
+        return this.series_infocasts;
     }
 
-    // @Override
-    // public String toString() {
+    public void setInfocast(List<Infocast> infocasts) {
+        this.series_infocasts = infocasts;
+    }
 
-    // return "Serie [id=" + id + ", url=" + url + ", description=" + description
-    // + ", year=" + year_film
-    // + ", duration=" + duration + ", director=" + director + "]";
+    public List<Infocast> getCreators() {
+        return this.series_infocasts;
+    }
 
-    // }
+    public void setCreators(List<Creator> creators) {
+        this.creators = creators;
+    }
 
 }

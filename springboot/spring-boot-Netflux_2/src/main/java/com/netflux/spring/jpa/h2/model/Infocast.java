@@ -1,13 +1,6 @@
 package com.netflux.spring.jpa.h2.model;
 
-import java.util.HashSet;
-//import org.hibernate.mapping.List;
-//import java.util.ArrayList;
 import java.util.List;
-
-//import jakarta.annotation.Generated;
-
-//import org.hibernate.mapping.List;
 
 import jakarta.persistence.*;
 

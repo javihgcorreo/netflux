@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.netflux.spring.jpa.h2.dto.InfoAbreviada;
+import com.netflux.spring.jpa.h2.model.Pelicula;
 import com.netflux.spring.jpa.h2.model.Serie;
 import com.netflux.spring.jpa.h2.model.Serie;
 import com.netflux.spring.jpa.h2.repository.SerieRepository;
@@ -115,40 +117,64 @@ public class SerieController {
     // }
     // }
 
+    // @GetMapping("/series/novedades")
+    // public ResponseEntity<List<Serie>> getAllSeriesNew() {
+    // try {
+    // List<Serie> series = new ArrayList<Serie>();
+
+    // serieRepository.findByYearendIsNull().forEach(series::add);
+
+    // if (series.isEmpty()) {
+    // return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    // }
+
+    // return new ResponseEntity<>(series, HttpStatus.OK);
+    // } catch (Exception e) {
+    // return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    // }
+    // }
+
     @GetMapping("/series/novedades")
-    public ResponseEntity<List<Serie>> getAllSeriesNew() {
+    public ResponseEntity<List<InfoAbreviada>> getAllSeriesNovedosas() {
         try {
-            List<Serie> series = new ArrayList<Serie>();
+            List<InfoAbreviada> series = new ArrayList<InfoAbreviada>();
+            series = serieService.getAllSeriesNovedosas();
 
-            serieRepository.findByYearendIsNull().forEach(series::add);
-
-            if (series.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
+            // if (peliculas.isEmpty()) {
+            // return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            // }
 
             return new ResponseEntity<>(series, HttpStatus.OK);
         } catch (Exception e) {
+
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/series/{id}")
-    public ResponseEntity<List<Serie>> getSerieById(@PathVariable String id) {
-        try {
-            List<Serie> series = new ArrayList<Serie>();
-
-            serieRepository.findById(Integer.parseInt(id)).forEach(series::add);
-
-            if (series.size() == 0) {
-
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La serie no existe");
-            }
-
-            return new ResponseEntity<>(series, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public ResponseEntity<Serie> getSerieById(@PathVariable("id") long id) {
+        Serie serieData = serieService.getSerieById(id);
+        return new ResponseEntity<>(serieData, HttpStatus.OK);
     }
+
+    // @GetMapping("/series/{id}")
+    // public ResponseEntity<List<Serie>> getSerieById(@PathVariable String id) {
+    // try {
+    // List<Serie> series = new ArrayList<Serie>();
+
+    // serieRepository.findById(Integer.parseInt(id)).forEach(series::add);
+
+    // if (series.size() == 0) {
+
+    // throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La serie no
+    // existe");
+    // }
+
+    // return new ResponseEntity<>(series, HttpStatus.OK);
+    // } catch (Exception e) {
+    // return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    // }
+    // }
 
     // @GetMapping("/series/{id}")
     // public ResponseEntity<Serie> getSerieById(@PathVariable("id") long id)
