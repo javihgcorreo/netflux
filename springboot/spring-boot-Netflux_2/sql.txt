@@ -1,0 +1,242 @@
+CREATE TABLE peliculas(ID BIGINT PRIMARY KEY,
+ url VARCHAR(255),
+ img_url VARCHAR(255),
+ title VARCHAR(255),
+ description VARCHAR(255),
+ year_film BIGINT,
+ duration BIGINT,
+ director VARCHAR(255));
+
+ CREATE TABLE infocast(ID BIGINT PRIMARY KEY,
+name VARCHAR(255),
+ img_url VARCHAR(255));
+
+
+ CREATE TABLE peliculas_infocast(
+peliculas_id BIGINT NOT NULL,
+infocast_id BIGINT NOT NULL,
+PRIMARY KEY (peliculas_id, infocast_id),
+foreign key (peliculas_id) references peliculas(id),
+foreign key (infocast_id) references infocast(id)
+);
+
+
+INSERT INTO peliculas(ID ,URL ,IMG_URL ,TITLE ,DESCRIPTION ,YEAR_FILM ,DURATION ,DIRECTOR ) VALUES(1,'url_peli1','img_url_peli1','Película1','Esto describe la peli1',2022,119,'Director peli1');
+
+INSERT INTO peliculas(ID ,URL ,IMG_URL ,TITLE ,DESCRIPTION ,YEAR_FILM ,DURATION ,DIRECTOR )  VALUES ('2','url_peli2','img_url_peli2','El Padrino','La historia de una familia mafiosa','1972','175','Francis Ford Coppola');
+INSERT INTO peliculas(ID ,URL ,IMG_URL ,TITLE ,DESCRIPTION ,YEAR_FILM ,DURATION ,DIRECTOR )  VALUES ('3','url_peli3','img_url_peli3','El Señor de los Anillos: La Comunidad del Anillo','La primera parte de la trilogía de El Señor de los Anillos','2001','178','Peter Jackson');
+INSERT INTO peliculas(ID ,URL ,IMG_URL ,TITLE ,DESCRIPTION ,YEAR_FILM ,DURATION ,DIRECTOR )  VALUES ('4','url_peli4','img_url_peli4','Titanic','Una historia de amor y tragedia','1997','194','James Cameron');
+INSERT INTO peliculas(ID ,URL ,IMG_URL ,TITLE ,DESCRIPTION ,YEAR_FILM ,DURATION ,DIRECTOR )  VALUES ('5','url_peli5','img_url_peli5','Casablanca','Una historia de amor y traición en la Segunda Guerra Mundial','1942','102','Michael Curtiz');
+
+INSERT INTO peliculas(ID, URL, IMG_URL, TITLE, DESCRIPTION, YEAR_FILM, DURATION, DIRECTOR)
+VALUES (6, 'https://www.imdb.com/title/tt10199466/', 'https://m.media-amazon.com/images/M/MV5BN2Y1N2FiZWQtZmJhMi00Y2Q5LWJiMmItY2Q1ZWNjZjEzZDlhXkFtZTgwNTIwMDE1MDE@._V1.SX300.jpg', 'Oppenheimer', 'Biopic del físico estadounidense J. Robert Oppenheimer', 2023, 165, 'Christopher Nolan');
+
+INSERT INTO peliculas(ID, URL, IMG_URL, TITLE, DESCRIPTION, YEAR_FILM, DURATION, DIRECTOR)
+VALUES (7, 'https://www.imdb.com/title/tt10873428/', 'https://m.media-amazon.com/images/I/612e3b762e4704013083121021788635_CR0,426,426_AL_.jpg', 'Spider-Man: Across the Spider-Verse', 'Secuela de la película de 2018 "Spider-Man: Into the Spider-Verse"', 2023, 122, 'Joaquim Dos Santos, Kemp Powers y Justin K. Thompson');
+
+INSERT INTO peliculas(ID, URL, IMG_URL, TITLE, DESCRIPTION, YEAR_FILM, DURATION, DIRECTOR)
+VALUES (8, 'https://www.imdb.com/title/tt10202334/', 'https://m.media-amazon.com/images/I/81o7r52fHFL._V1.SX300.jpg', 'Guardianes de la Galaxia Vol. 3', 'Tercera entrega de la saga "Guardianes de la Galaxia"', 2023, 160, 'James Gunn');
+
+
+CREATE TABLE series(ID BIGINT PRIMARY KEY,
+ url VARCHAR(255),
+ img_url VARCHAR(255),
+ title VARCHAR(255),
+ description VARCHAR(255),
+ yearstart BIGINT,
+ yearEnd BIGINT,
+ seasons BIGINT);
+
+ -- Inserción de una serie popular
+INSERT INTO series (id, url, img_url, title, description, yearstart, yearEnd, seasons)
+VALUES (1, 'https://www.example.com/series/stranger-things', 'https://www.example.com/images/stranger-things.jpg', 'Stranger Things', 'Un grupo de niños enfrenta fenómenos sobrenaturales en los años 80.', 2016, 0, 4);
+-- Inserción de otra serie exitosa
+INSERT INTO series (id, url, img_url, title, description, yearstart, yearEnd, seasons)
+VALUES (2, 'https://www.example.com/series/breaking-bad', 'https://www.example.com/images/breaking-bad.jpg', 'Breaking Bad', 'Un profesor de química se convierte en fabricante de metanfetaminas.', 2008, 2013, 5);
+-- Puedes continuar con más inserciones según sea necesario
+
+
+-- No se usa
+CREATE TABLE InfoDestacados (
+    id BIGINT PRIMARY KEY,
+    tytype_destacadope VARCHAR(255) NOT NULL,
+    url VARCHAR(255) NOT NULL,
+    img_url VARCHAR(255) NOT NULL
+);
+
+INSERT INTO InfoDestacados(id, type_destacado, url, img_url)
+VALUES (1, 'movie', 'https://www.imdb.com/title/tt10199466/', 'https://m.media-amazon.com/images/M/MV5BN2Y1N2FiZWQtZmJhMi00Y2Q5LWJiMmItY2Q1ZWNjZjEzZDlhXkFtZTgwNTIwMDE1MDE@._V1.SX300.jpg');
+
+INSERT INTO InfoDestacados(id, type_destacado, url, img_url)
+VALUES (2, 'movie', 'https://www.imdb.com/title/tt10873428/', 'https://m.media-amazon.com/images/I/612e3b762e4704013083121021788635_CR0,426,426_AL_.jpg');
+
+INSERT INTO InfoDestacados(id, type_destacado, url, img_url)
+VALUES (3, 'movie', 'https://www.imdb.com/title/tt10202334/', 'https://m.media-amazon.com/images/I/81o7r52fHFL._CR0,426,426_AL_.jpg');
+
+INSERT INTO InfoDestacados(id, type_destacado, url, img_url)
+VALUES (4, 'series', 'https://www.imdb.com/title/tt8211210/', 'https://m.media-amazon.com/images/M/MV5BMTcyNjE2OTk1MV5BMl5BanBnXkFtZTgwNDk2NzY3MjE@._V1_SX300.jpg');
+
+INSERT INTO InfoDestacados(id, type_destacado, url, img_url)
+VALUES (5, 'series', 'https://www.imdb.com/title/tt10811392/', 'https://m.media-amazon.com/images/M/MV5BN2I5Y2Q2N2MtY2MzMC00YWI4LTg0M2UtYWE4Y2I3MzY1N2Y3XkEyXkFqcGdeQXVyMDM2NDM2MDc@._V1_SX300.jpg');
+
+INSERT INTO InfoDestacados(id, type_destacado, url, img_url)
+VALUES (6, 'series', 'https://www.imdb.com/title/tt10831224/', 'https://m.media-amazon.com/images/M/MV5BY2U3Y2Q4YzUtMTg2NC00MTQ5LTkzNjUtMDk3YzQ4Y2MxY2U2XkEyXkFqcGdeQXVyMDM2NDM2MDc@._V1_SX300.jpg');
+
+
+
+
+tabla TRAILERS.
+
+INSERT INTO Trailers(id, img_url, title, url)
+VALUES (1, 'https://m.media-amazon.com/images/M/MV5BN2Y1N2FiZWQtZmJhMi00Y2Q5LWJiMmItY2Q1ZWNjZjEzZDlhXkFtZTgwNTIwMDE1MDE@._V1_SX300.jpg', 'Oppenheimer', 'https://www.youtube.com/watch?v=76o3j-44-0k');
+
+INSERT INTO Trailers(id, img_url, title, url)
+VALUES (2, 'https://m.media-amazon.com/images/I/612e3b762e4704013083121021788635_CR0,426,426_AL_.jpg', 'Spider-Man: Across the Spider-Verse', 'https://www.youtube.com/watch?v=68xP1xu72yA');
+
+INSERT INTO Trailers(id, img_url, title, url)
+VALUES (3, 'https://m.media-amazon.com/images/I/81o7r52fHFL._CR0,426,426_AL_.jpg', 'Guardianes de la Galaxia Vol. 3', 'https://www.youtube.com/watch?v=5y5t4s0iO-8');
+
+INSERT INTO Trailers(id, img_url, title, url)
+VALUES (4, 'https://m.media-amazon.com/images/M/MV5BMTcyNjE2OTk1MV5BMl5BanBnXkFtZTgwNDk2NzY3MjE@._V1_SX300.jpg', 'The Boys', 'https://www.youtube.com/watch?v=h-Q-01f_i1E');
+
+INSERT INTO Trailers(id, img_url, title, url)
+VALUES (5, 'https://m.media-amazon.com/images/M/MV5BN2I5Y2Q2N2MtY2MzMC00YWI4LTg0M2UtYWE4Y2I3MzY1N2Y3XkEyXkFqcGdeQXVyMDM2NDM2MDc@._V1_SX300.jpg', 'Succession', 'https://www.youtube.com/watch?v=t3129372Y3U');
+
+INSERT INTO Trailers(id, img_url, title, url)
+VALUES (6, 'https://m.media-amazon.com/images/I/81o7r52fHFL._CR0,426,426_AL_.jpg', 'The House', 'https://www.youtube.com/watch?v=sX-i9-3l-38');
+
+INSERT INTO infocast (id, name, img_url)
+VALUES
+  (1, 'Harrison Ford', 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Harrison_Ford_2020.jpg/1200px-Harrison_Ford_2020.jpg'),
+  (2, 'Al Pacino', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Al_Pacino_2019.jpg/1200px-Al_Pacino_2019.jpg'),
+  (3, 'Ian McKellen', 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Ian_McKellen_2019.jpg/1200px-Ian_McKellen_2019.jpg'),
+  (4, 'Leonardo DiCaprio', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Leonardo_DiCaprio_2019.jpg/1200px-Leonardo_DiCaprio_2019.jpg'),
+  (5, 'Ingrid Bergman', 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Ingrid_Bergman_in_Casablanca_1942.jpg/1200px-Ingrid_Bergman_in_Casablanca_1942.jpg');
+
+INSERT INTO infocast (id, name, img_url)
+VALUES
+ (6, 'Ryan Gosling', 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Ryan_Gosling_2022.jpg/1200px-Ryan_Gosling_2022.jpg'),
+ (7, 'Ana de Armas', 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Ana_de_Armas_2019.jpg/1200px-Ana_de_Armas_2019.jpg'),
+ (8, 'Dave Bautista', 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Dave_Bautista_2019.jpg/1200px-Dave_Bautista_2019.jpg'),
+ (9, 'Jared Leto', 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Jared_Leto_2019.jpg/1200px-Jared_Leto_2019.jpg'),
+ (10, 'Marlon Brando', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Marlon_Brando_1964.jpg/1200px-Marlon_Brando_1964.jpg'),
+ (11, 'James Caan', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/James_Caan_2016.jpg/1200px-James_Caan_2016.jpg'),
+ (12, 'Robert Duvall', 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Robert_Duvall_2017.jpg/1200px-Robert_Duvall_2017.jpg'),
+ (13, 'Diane Keaton', 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Diane_Keaton_2019.jpg/1200px-Diane_Keaton_2019.jpg'),
+ (14, 'Elijah Wood', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Elijah_Wood_2017.jpg/1200px-Elijah_Wood_2017.jpg'),
+ (15, 'Viggo Mortensen', 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Viggo_Mortensen_2019.jpg/1200px-Viggo_Mortensen_2019.jpg'),
+ (16, 'Sean Astin', 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Sean_Astin_2019.jpg/1200px-Sean_Astin_2019.jpg'),
+ (17, 'Orlando Bloom', 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Orlando_Bloom_2017.jpg/1200px-Orlando_Bloom_2017.jpg'),
+ (18, 'Kate Winslet', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Kate_Winslet_2019.jpg/1200px-Kate_Winslet_2019.jpg'),
+ (19, 'Billy Zane', 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Billy_Zane_2019.jpg/1200px-Billy_Zane_2019.jpg'),
+ (20, 'Kathy Bates', 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Kathy_Bates_2019.jpg/1200px-Kathy_Bates_2019.jpg'),
+ (21, 'Humphrey Bogart', 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Humphrey_Bogart_in_Casablanca_1942.jpg/1200px-Humphrey_Bogart_in_Casablanca_1942.jpg'),
+ (22, 'Cillian Murphy', 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Cillian_Murphy_2019.jpg/1200px-Cillian_Murphy_2019.jpg'),
+ (23, 'Emily Blunt', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Emily_Blunt_2013.jpg/1200px-Emily_Blunt_2013.jpg'),
+ (24, 'Matt Damon', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Matt_Damon_2015.jpg/1200px-Matt_Damon_2015.jpg'),
+ (25, 'Shameik Moore', 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Shameik_Moore_2019.jpg/1200px-Shameik_Moore_2019.jpg'),
+ (26, 'Hailee Steinfeld', 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Hailee_Steinfeld_2022.jpg/1200px-Hailee_Steinfeld_2022.jpg'),
+ (27, 'Brian Tyree Henry', 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Brian_Tyree_Henry_TIFF_2017.jpg/1200px-Brian_Tyree_Henry_TIFF_2017.jpg'),
+ (28, 'Chris Pratt', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Chris_Pratt_2019.jpg/1200px-Chris_Pratt_2019.jpg');
+
+
+INSERT INTO peliculas_infocast (peliculas_id, infocast_id)
+VALUES
+  (1, 1),
+  (1, 6),
+  (1, 7),
+  (2, 2),
+  (2, 10),
+  (3, 14),
+  (3, 15),
+  (4, 4),
+  (4, 18),
+  (5, 5),
+  (5, 21),
+  (6, 22),
+  (6, 23),
+  (6, 24),
+  (7, 25),
+  (7, 26),
+  (7, 27),
+  (8, 8),
+  (8, 28);
+
+   CREATE TABLE peliculasDestacadas(fk_peliculas_id BIGINT PRIMARY KEY,
+foreign key (fk_peliculas_id) references peliculas(id)
+);
+
+ CREATE TABLE seriesDestacadas(fk_series_id BIGINT PRIMARY KEY,
+foreign key (fk_series_id) references series(id)
+);
+
+--series destacadas
+insert into SERIESDESTACADAS values (1);
+insert into SERIESDESTACADAS values (2);
+
+ CREATE TABLE series_infocast(
+series_id BIGINT NOT NULL,
+infocast_id BIGINT NOT NULL,
+PRIMARY KEY (series_id, infocast_id),
+foreign key (series_id) references series(id),
+foreign key (infocast_id) references infocast(id)
+);
+
+
+INSERT INTO series_infocast (series_id, infocast_id)
+VALUES
+  (1, 15),
+  (1, 16),
+  (1, 17),
+  (2, 22),
+  (2, 10),
+  (2, 28);
+
+  CREATE TABLE creators (
+    id BIGINT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+  );
+
+  INSERT INTO creators (id, name) VALUES
+  (1, 'Akira Toriyama'),
+  (2, 'Eiichiro Oda'),
+  (3, 'Hayao Miyazaki'),
+  (4, 'Takeshi Koshiba'),
+  (5, 'Atsushi Okubo'),
+  (6, 'Kōhei Horikoshi'),
+  (7, 'Hiroyuki Nishimori'),
+  (8, 'Wit Studio'),
+  (9, 'Mappa'),
+  (10, 'Ufotable'),
+  (11, 'the Duffer Brothers),
+   (12, 'Vince Gilligan');
+
+   CREATE TABLE series_creators(
+series_id BIGINT NOT NULL,
+creators_id BIGINT NOT NULL,
+PRIMARY KEY (series_id, creators_id),
+foreign key (series_id) references series(id),
+foreign key (creators_id) references creators(id)
+);
+
+INSERT INTO series_creators (series_id, creators_id)
+VALUES
+  (1, 11),
+  (2, 12);
+
+
+CREATE TABLE peliculasNovedades(fk_peliculas_id BIGINT PRIMARY KEY,
+foreign key (fk_peliculas_id) references peliculas(id)
+);
+
+CREATE TABLE seriesNovedades(fk_series_id BIGINT PRIMARY KEY,
+foreign key (fk_series_id) references series(id)
+);
+
+insert into PELICULASNOVEDADES (FK_PELICULAS_ID ) 
+ values
+ (1),(2),(6),(7),(8);
+
+insert into SERIESNOVEDADES (FK_SERIES_ID ) 
+ values
+ (1),(2);

@@ -1,0 +1,192 @@
+---
+swagger: "2.0"
+info:
+  description: "NetFlux API\n"
+  version: "1.0.0"
+  title: "NetFlux API"
+host: "dsai-netflux.up.railway.app"
+basePath: "/api"
+schemes:
+- "https"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /destacados:
+    get:
+      operationId: "destacadosGET"
+      parameters: []
+      responses:
+        200:
+          description: "Devuelve la lista de películas y series destacadas"
+          schema:
+            type: "array"
+            title: "Destacados"
+            items:
+              $ref: "#/definitions/InfoDestacados"
+      x-swagger-router-controller: "Default"
+  /peliculas/novedades:
+    get:
+      operationId: "peliculasNovedadesGET"
+      parameters: []
+      responses:
+        200:
+          description: "Devuelve las novedades en Películas"
+          schema:
+            type: "array"
+            title: "Peliculas"
+            items:
+              $ref: "#/definitions/InfoAbreviada"
+      x-swagger-router-controller: "Default"
+  /peliculas/{id}:
+    get:
+      operationId: "peliculasIdGET"
+      parameters:
+        - in: "path"
+          name: "id"
+          type: "string"
+          required: true
+          description: ID de la película
+      responses:
+        200:
+          description: "Devuelve los detalles de una película"
+          schema:
+            $ref: "#/definitions/InfoPelicula"
+        404:
+          description: "La película no existe"
+      x-swagger-router-controller: "Default"
+  /series/novedades:
+    get:
+      operationId: "seriesNovedadesGET"
+      parameters: []
+      responses:
+        200:
+          description: "Devuelve las novedades en Series"
+          schema:
+            type: "array"
+            title: "Series"
+            items:
+              $ref: "#/definitions/InfoAbreviada"
+      x-swagger-router-controller: "Default"
+  /series/{id}:
+    get:
+      operationId: "seriesIdGET"
+      parameters:
+        - in: "path"
+          name: "id"
+          type: "string"
+          required: true
+          description: ID de la serie
+      responses:
+        200:
+          description: "Devuelve los detalles de una serie. Si la fecha de fin es 0, la serie no ha terminado todavía."
+          schema:
+            $ref: "#/definitions/InfoSerie"
+        404:
+          description: "La serie no existe"
+      x-swagger-router-controller: "Default"
+  /trailers:
+    get:
+      operationId: "trailersGET"
+      parameters: []
+      responses:
+        200:
+          description: "Devuelve una lista de trailers de películas"
+          schema:
+            type: "array"
+            title: "Destacados"
+            items:
+              $ref: "#/definitions/Trailer"
+      x-swagger-router-controller: "Default"
+definitions:
+  InfoDestacados:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      type:
+        type: "string"
+      url:
+        type: "string"
+      title:
+        type: "string"
+      imgURL:
+        type: "string"
+  InfoAbreviada:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      url:
+        type: "string"
+      title:
+        type: "string"
+      imgURL:
+        type: "string"
+  InfoPelicula:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      url:
+        type: "string"
+      imgURL:
+        type: "string"
+      title:
+        type: "string"
+      description:
+        type: "string"
+      year:
+        type: "integer"
+      duration:
+        type: "integer"
+      director:
+        type: "string"
+      cast:
+        type: "array"
+        items:
+          $ref: "#/definitions/InfoCast"
+  InfoSerie:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      url:
+        type: "string"
+      imgURL:
+        type: "string"
+      title:
+        type: "string"
+      description:
+        type: "string"
+      yearStart:
+        type: "integer"
+      yearEnd:
+        type: "integer"
+      seasons:
+        type: "integer"
+      creators:
+        type: "array"
+        items:
+          type: "string"
+      cast:
+        type: "array"
+        items:
+          $ref: "#/definitions/InfoCast"
+  InfoCast:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      imgURL:
+        type: "string"
+  Trailer:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+      url:
+        type: "string"
+      imgURL:
+        type: "string"

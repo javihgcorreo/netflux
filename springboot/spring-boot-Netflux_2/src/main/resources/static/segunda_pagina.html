@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Título de la Página Principal</title>
+    
+    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/get-string-params.js"></script>
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <script>
+        window.onload = introPeliculaDetalleNuevasEnDOMpaginaHtml(peliculaSolicitada_id);
+    </script>
+    <div class="container-fluid">
+        <div class="div-con-contenido">
+                <div class="col-lg-1">
+                    <a class="navbar-brand" href="#"><img src="img/iconNetflux.png" class="img-fluid max-width-30px d-block" alt="Logo"></a>
+                </div>
+                <div class="col-lg-4">
+                    <h1>NetFlux Catalog</h1>
+                </div>
+        </div>
+        <div class="div-con-contenido">
+            <div class="row">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="index.html">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Películas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Televisión</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Documentales</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Recomendaciones</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Trailers</a>
+                            </li>
+                        </ul>
+                    </div>
+                
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-1">
+        <div id="titulo">
+            <div class="row">
+                <div class="col-12"><h2>Título</h2></div>
+                <div class="col-12"><h4>2016</h4></div>
+                <hr class="separador">
+                <div class="col-12"><button>Ver en NetFlux</button></div>
+            </div>
+        </div>
+
+        <div id="cuerpo_productos" class="row mt-4">
+            <div id="productos" class="col-lg-8">
+                
+                <div id="peliculaSelect" class="row">
+                    <!-- Miniaturas de películas y series utilizando clases de Bootstrap para la rejilla -->
+                    <div class="col-4">
+                        <div>
+                            <img src="img/peliDejateQuerer_1.jpg" alt="Pel&iacute;cula Dejate querer">
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="row"><h3>T&iacute;tulo</h3></div>
+                        <div class="row"><h6>A&ntilde;o</h6></div>
+                        <div class="row"><h6>Duraci&oacute;n</h6></div>
+                        <hr class="separador">
+                        <div class="row">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores sapiente magnam quam animi, ratione tempora autem inventore, voluptatem dolores optio excepturi in maiores, neque sint dolor voluptatum deserunt eum! Sint?</p>
+                        </div>
+                    </div>
+                    <!-- Repite este bloque para otras miniaturas -->
+                </div><!--peliculaSelect-->
+
+                <div id="peliculaSelectReparto" class="row">
+                    <!-- Miniaturas de películas y series utilizando clases de Bootstrap para la rejilla -->
+                    <div class="row">
+                        <h4>Reparto del T&iacute;tulo</h4>
+                    </div>
+                    <div class="row">
+                        <div class="row"><h5>Creado por:</h5></div>
+                        <div class="row"><h6>Creadores de la serie o pel&iacute;cula</h6></div>
+                        <div class="row mt-2"><h6>Reparto:</h5></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-6">Actor</div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">Actriz</div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">Actor</div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">Actor</div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">Actriz</div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">Actor</div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">Actor</div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">Actriz</div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">Actor</div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">Actor</div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">Actriz</div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">Actor</div>
+                    </div>
+                    <!-- Repite este bloque para otras miniaturas -->
+                </div><!--peliculaSelectReparto-->
+
+            </div><!--productos-->
+
+            <div id="mostrador" class="col-lg-4">
+                
+                <h4>Destacados</h4>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-2">
+                                <img src="img/peliDejateQuerer_1.jpg" alt="Película Dejate querer">
+                            </div>
+                            <div class="col-lg-10">
+                                <h6>D&eacutejate querer</h6>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-2">
+                                <img src="img/peliDejateQuerer_1.jpg" alt="Película Dejate querer">
+                            </div>
+                            <div class="col-lg-10">
+                                <h6>D&eacutejate querer</h6>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-2">
+                                <img src="img/peliDejateQuerer_1.jpg" alt="Película Dejate querer">
+                            </div>
+                            <div class="col-lg-10">
+                                <h6>D&eacutejate querer</h6>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-2">
+                                <img src="img/peliDejateQuerer_1.jpg" alt="Película Dejate querer">
+                            </div>
+                            <div class="col-lg-10">
+                                <h6>D&eacutejate querer</h6>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-2">
+                                <img src="img/peliDejateQuerer_1.jpg" alt="Película Dejate querer">
+                            </div>
+                            <div class="col-lg-10">
+                                <h6>D&eacutejate querer</h6>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <h4>Trailers</h4>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-2">
+                                <img src="img/peliDejateQuerer_1.jpg" alt="Película Dejate querer">
+                            </div>
+                            <div class="col-lg-10">
+                                <h6>D&eacutejate querer</h6>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-2">
+                                <img src="img/peliDejateQuerer_1.jpg" alt="Película Dejate querer">
+                            </div>
+                            <div class="col-lg-10">
+                                <h6>D&eacutejate querer</h6>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-2">
+                                <img src="img/peliDejateQuerer_1.jpg" alt="Película Dejate querer">
+                            </div>
+                            <div class="col-lg-10">
+                                <h6>D&eacutejate querer</h6>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                
+                
+            </div><!--mostrador-->
+
+        </div><!--productos-->
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2023 NetFlux Company Right</p>
+        </div>
+    </footer>
+
+    <!--<script src="bootstrap/dist/js/bootstrap.bundle.min.js"></script>-->
+</body>
+</html>

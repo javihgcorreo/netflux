@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Peliculas y series</title>
+</head>
+<body>
+    <h1>Peliculas y series</h1>
+
+    <script>
+        function cargarContenido() {
+            // Llamada AJAX para cargar la lista de películas
+            const peticionPeliculas = new XMLHttpRequest();
+            peticionPeliculas.open("GET", "/api/peliculas");
+            peticionPeliculas.onload = function() {
+                if (peticionPeliculas.status === 200) {
+                    // Procesar la respuesta
+                    const peliculas = JSON.parse(peticionPeliculas.responseText);
+                    // Mostrar la lista de películas
+                    const listaPeliculas = document.getElementById("lista-peliculas");
+                    for (const pelicula of peliculas) {
+                        const li = document.createElement("li");
+                        li.textContent = pelicula.title;
+                        li.addEventListener("click", function() {
+                            // Cargar los detalles de la película
+                            cargarDetallesPelicula(pelicula.id);
+                        });
+                        listaPeliculas.appendChild(li);
+                    }
+                } else {
+                    // Mostrar un error
+                    alert("Error al cargar la lista de películas");
+                }
+            };
+            peticionPeliculas.send();
+
+            // Llamada AJAX para cargar la lista de series
+            const peticionSeries = new XMLHttpRequest();
+            peticionSeries.open("GET", "/api/series");
+            peticionSeries.onload = function() {
+                if (peticionSeries.status === 200) {
+                    // Procesar la respuesta
+                    const series = JSON.parse(peticionSeries.responseText);
+
+                    // Mostrar la lista de series
+                    const listaSeries = document.getElementById("lista-series");
+                    for (const serie of series) {
+                        const li = document.createElement("li");
+                        li.textContent = serie.title;
+                        li.addEventListener("click", function() {
+                            // Cargar los detalles de la serie
+                            //cargarDetallesSerie(serie.id);
+                        });
+                        listaSeries.appendChild(li);
+                    }
+                } else {
+                    // Mostrar un error
+                    alert("Error al cargar la lista de series");
+                }
+            };
+            peticionSeries.send();
+        }
+
+        function cargarDetallesPelicula(id) {
+            // Llamada AJAX para cargar los detalles de la película
+            const peticionDetalles = new XMLHttpRequest();
+            peticionDetalles.open("GET", "/api/peliculas/" + id);
+            peticionDetalles.onload = function() {
+                if (peticionDetalles.status === 200) {
+                    // Procesar la respuesta
+                    //alert(peticionDetalles.status);
+                    const pelicula = JSON.parse(peticionDetalles.responseText);
+                    //alert(peticionDetalles.responseText);
+                    //otra = JSON.parse(peticionDetalles.responseText);
+                    //alert(otra.JSON);
+                    // Mostrar los detalles de la película
+                    const divDetalles = document.getElementById("detalles");
+                    console.log(pelicula.title);
+                    divDetalles.innerHTML = `
+                        <h2>Detalles de la película</h2>
+                        <ul>
+                            <li>Título: ${pelicula.title}</li>
+                            <li>Año: ${pelicula.yearFilm}</li>
+                            <li>Descripcion: ${pelicula.description}</li>
+                            <li>url: ${pelicula.url}</li>
+                            <li>imgUrl: ${pelicula.imgUrl}</li>
+                        </ul>
+                    `;
+                } else {
+                    // Mostrar un error
+                    alert("Error al cargar los detalles de la película");
+                }
+            };
+            peticionDetalles.send();
+        }
+        
+    </script>
+
+    <ul id="lista-peliculas">
+    </ul>
+
+    <ul id="lista-series">
+    </ul>
+
+    <ul id="detalles">
+    </ul>
+
+    <script>
+        // ...
+
+        // Cargar las películas
+        cargarContenido();
+
+        // ...
+    </script>
+</body>            

@@ -1,0 +1,77 @@
+/* Estilos personalizados aquí */
+nav a {
+    text-align: center;
+  }
+
+/* Puedes personalizar los estilos según tus necesidades */
+.div-con-contenido {
+  display: flex;
+  align-items: center; /* Centrar verticalmente */
+  justify-content: center; /* Centrar horizontalmente */
+  height: 100%; /* Esto es importante para que funcione la alineación vertical */
+}
+
+.thumbnail {
+    text-align: center;
+}
+
+.thumbnail img {
+    max-width: 100%;
+}
+
+hr.separador {
+  border: none;
+  border-top: 1px solid #000; /* Una línea sólida de 1 píxel de ancho y color negro */
+}
+
+/*************Redimensiono solo para la miniatuas en esta clase list img********************************************/
+.list-group-item .row .col-2 img {
+  max-width: 100%;
+  height: auto;
+}
+
+.list-group-item .row .col-10 {
+  padding-left: 10px; /* Añade espacio a la izquierda del título para evitar que se superponga con la imagen */
+}
+/***************************************************************/
+
+.footer {
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* Definición de la rejilla */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  /* Ajuste de la rejilla en diferentes tamaños de pantalla */
+  @media (max-width: 768px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+/* Puedes agregar más estilos personalizados según tus necesidades */
+#mostrador {
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+#navbarNav {
+align-content: center;
+}
+
+#titulo {
+  display: flex;
+  align-items: center; /* Centrar verticalmente */
+  justify-content: center; /* Centrar horizontalmente */
+  height: 100%; /* Esto es importante para que funcione la alineación vertical */
+}

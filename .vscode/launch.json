@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "SpringBootJpaH2Application",
+            "request": "launch",
+            "mainClass": "com.netflux.spring.jpa.h2.SpringBootJpaH2Application",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-SpringBootJpaH2Application<spring-boot-jpa-h2>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.netflux.spring.jpa.h2.SpringBootJpaH2Application",
+            "projectName": "spring-boot-jpa-h2",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
