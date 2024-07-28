@@ -150,8 +150,8 @@ public class Serie {
         this.series_infocasts = infocasts;
     }
 
-    public List<Infocast> getCreators() {
-        return this.series_infocasts;
+    public List<Creator> getCreators() {
+        return this.creators;
     }
 
     public void setCreators(List<Creator> creators) {

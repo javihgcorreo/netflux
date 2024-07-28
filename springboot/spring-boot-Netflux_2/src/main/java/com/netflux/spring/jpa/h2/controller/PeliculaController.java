@@ -94,30 +94,15 @@ public class PeliculaController {
         }
     }
 
-    // @GetMapping("/peliculas/{id}")
-    // public ResponseEntity<List<Pelicula>> getPeliculasById(@PathVariable String
-    // id) {
-    // try {
-    // List<Pelicula> peliculas = new ArrayList<Pelicula>();
-
-    // peliculaRepository.findById(Integer.parseInt(id)).forEach(peliculas::add);
-
-    // if (peliculas.size() == 0) {
-
-    // throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La pelicula no
-    // existe");
-    // }
-
-    // return new ResponseEntity<>(peliculas, HttpStatus.OK);
-    // } catch (Exception e) {
-    // return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-    // }
-    // }
-
     @GetMapping("/peliculas/{id}")
-    public ResponseEntity<Pelicula> getPeliculaById(@PathVariable("id") long id) {
-        Pelicula peliculaData = peliculaService.getPeliculaById(id);
-        return new ResponseEntity<>(peliculaData, HttpStatus.OK);
+    public ResponseEntity<InfoPelicula> getPeliculaById(@PathVariable("id") long id) {
+        try {
+            InfoPelicula peliculaData = peliculaService.getPeliculaById(id);
+            return new ResponseEntity<>(peliculaData, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     /*

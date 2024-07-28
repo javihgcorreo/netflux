@@ -19,14 +19,17 @@ import com.netflux.spring.jpa.h2.dto.InfoDestacados;
 import com.netflux.spring.jpa.h2.dto.InfoAbreviada;
 
 import com.netflux.spring.jpa.h2.dto.InfoPelicula;
+import com.netflux.spring.jpa.h2.dto.InfocastDTO;
+
 import com.netflux.spring.jpa.h2.service.PeliculaService;
 
 import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.ArrayList;
-//import java.util.Collection;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Optional;
 
 @Service
 public class PeliculaService {
@@ -129,9 +132,38 @@ public class PeliculaService {
         return infoDestacadosObjects;
     }
 
-    public Pelicula getPeliculaById(Long id) {
-        return peliculaRepository.findById(id).orElse(null);
+    public InfoPelicula getPeliculaById(Long id) {
+        Optional<Pelicula> peliculaOpcional = peliculaRepository.findById(id);// pido la pelicula al repositorio de la
+                                                                              // BBDD
+
+        Pelicula pelicula = peliculaOpcional.orElse(new Pelicula()); // Si está vacío, crea una nueva Pelicula, capturo
+                                                                     // la Pelicula
+
+        Collection<Infocast> casts = pelicula.getInfocast();// de la pelicula saco los actores del cast
+
+        List<InfocastDTO> infoCastsObjects = casts.stream()// mapeo el cast a su DTO
+                .map(cast -> new InfocastDTO(cast.getName(), cast.getImgUrl()))
+                .collect(Collectors.toList());
+
+        // Mapear Peliculas a InfoDestacados, uso el constructor del DTO
+
+        InfoPelicula infoPelicula = new InfoPelicula(Long.toString(pelicula.getId()), pelicula.getUrl(),
+                pelicula.getImgUrl(), pelicula.getTitle(), pelicula.getDescription(), pelicula.getYearFilm(),
+                pelicula.getDuration(), pelicula.getDirector(), infoCastsObjects);
+        ;
+
+        System.out.println("InfoPelicula = " + infoPelicula);
+
+        return infoPelicula;
+
+        // return peliculaRepository.findById(id).orElse(null);
+
     }
+
+    // public Pelicula getPeliculaById(Long id) {
+
+    // return peliculaRepository.findById(id).orElse(null);
+    // }
 
     public Pelicula savePelicula(Pelicula pelicula) {
         return peliculaRepository.save(pelicula);

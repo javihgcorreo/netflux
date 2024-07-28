@@ -1,9 +1,14 @@
 package com.netflux.spring.jpa.h2.dto;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.stream.Collectors;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+@Data
+@Setter
+@Getter
 public class InfoPelicula {
     private String id;
     private String url;
@@ -13,12 +18,12 @@ public class InfoPelicula {
     private Integer year;
     private Integer duration;
     private String director;
-    private Collection<String> cast;
+    private Collection<InfocastDTO> cast;
 
     // Constructor
     public InfoPelicula(String id, String url, String imgURL, String title,
             String description, Integer year, Integer duration,
-            String director, Collection<String> cast) {
+            String director, Collection<InfocastDTO> cast) {
         this.id = id;
         this.url = url;
         this.imgURL = imgURL;

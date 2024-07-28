@@ -21,8 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.netflux.spring.jpa.h2.dto.InfoAbreviada;
+import com.netflux.spring.jpa.h2.dto.InfoPelicula;
+import com.netflux.spring.jpa.h2.dto.InfoSerie;
+
 import com.netflux.spring.jpa.h2.model.Pelicula;
-import com.netflux.spring.jpa.h2.model.Serie;
 import com.netflux.spring.jpa.h2.model.Serie;
 import com.netflux.spring.jpa.h2.repository.SerieRepository;
 import com.netflux.spring.jpa.h2.service.SerieService;
@@ -81,9 +83,9 @@ public class SerieController {
      */
 
     @GetMapping("/series")
-    public ResponseEntity<List<Serie>> getAllSeries() {
+    public ResponseEntity<List<InfoSerie>> getAllSeries() {
         try {
-            List<Serie> series = new ArrayList<Serie>();
+            List<InfoSerie> series = new ArrayList<InfoSerie>();
             series = serieService.getAllSeries();
 
             if (series.isEmpty()) {
@@ -152,10 +154,21 @@ public class SerieController {
     }
 
     @GetMapping("/series/{id}")
-    public ResponseEntity<Serie> getSerieById(@PathVariable("id") long id) {
-        Serie serieData = serieService.getSerieById(id);
-        return new ResponseEntity<>(serieData, HttpStatus.OK);
+    public ResponseEntity<InfoSerie> getSerieById(@PathVariable("id") long id) {
+        try {
+            InfoSerie serieData = serieService.getSerieById(id);
+            return new ResponseEntity<>(serieData, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
+
+    // @GetMapping("/series/{id}")
+    // public ResponseEntity<Serie> getSerieById(@PathVariable("id") long id) {
+    // Serie serieData = serieService.getSerieById(id);
+    // return new ResponseEntity<>(serieData, HttpStatus.OK);
+    // }
 
     // @GetMapping("/series/{id}")
     // public ResponseEntity<List<Serie>> getSerieById(@PathVariable String id) {
