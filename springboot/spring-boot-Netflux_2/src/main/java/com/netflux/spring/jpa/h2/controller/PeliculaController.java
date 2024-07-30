@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-//import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 //import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.http.ResponseEntity;
 
 import com.netflux.spring.jpa.h2.model.Pelicula;
 import com.netflux.spring.jpa.h2.repository.PeliculaRepository;
@@ -105,19 +104,17 @@ public class PeliculaController {
 
     }
 
-    /*
-     * @PostMapping("/peliculas")
-     * public ResponseEntity<Pelicula> createPelicula(@RequestBody Pelicula
-     * Pelicula) {
-     * try {
-     * Pelicula _Pelicula = PeliculaRepository.save(new
-     * Pelicula(Pelicula.getTitle(), Pelicula.getDescription(), false));
-     * return new ResponseEntity<>(_Pelicula, HttpStatus.CREATED);
-     * } catch (Exception e) {
-     * return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-     * }
-     * }
-     */
+    // @PostMapping("/peliculas")
+    // public ResponseEntity<Pelicula> createPelicula(@RequestBody Pelicula
+    // Pelicula) {
+    // try {
+    // Pelicula _Pelicula = PeliculaRepository
+    // .save(new Pelicula(Pelicula.getTitle(), Pelicula.getDescription(), false));
+    // return new ResponseEntity<>(_Pelicula, HttpStatus.CREATED);
+    // } catch (Exception e) {
+    // return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    // }
+    // }
 
     /*
      * @PutMapping("/peliculas/{id}")
@@ -138,18 +135,16 @@ public class PeliculaController {
      * }
      */
 
-    /*
-     * @DeleteMapping("/peliculas/{id}")
-     * public ResponseEntity<HttpStatus> deletePelicula(@PathVariable("id") long id)
-     * {
-     * try {
-     * PeliculaRepository.deleteById(id);
-     * return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-     * } catch (Exception e) {
-     * return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-     * }
-     * }
-     */
+    @DeleteMapping("/peliculas/{id}")
+    public ResponseEntity<HttpStatus> deletePelicula(@PathVariable("id") long id) {
+        try {
+
+            peliculaService.deletePelicula(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     /*
      * @DeleteMapping("/peliculas")

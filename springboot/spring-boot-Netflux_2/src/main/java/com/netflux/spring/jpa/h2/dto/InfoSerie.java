@@ -23,7 +23,11 @@ public class InfoSerie {
 
     private Collection<InfocastDTO> cast;
 
-    // Constructor
+    // Constructores
+    public InfoSerie() {
+
+    }
+
     public InfoSerie(String id, String url, String imgURL, String title,
             String description, Integer yearStart, Integer yearEnd, Integer seasons,
             Collection<String> creators, Collection<InfocastDTO> cast) {

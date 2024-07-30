@@ -17,6 +17,7 @@ import lombok.Builder;
 @Builder
 @Entity
 @Table(name = "peliculas")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Pelicula {
     /*
      * @Id
@@ -26,6 +27,7 @@ public class Pelicula {
      */
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
@@ -56,9 +58,9 @@ public class Pelicula {
     @JoinTable(name = "peliculas_infocasts", joinColumns = @JoinColumn(name = "pelicula_id"), inverseJoinColumns = @JoinColumn(name = "infocast_id"))
     private List<Infocast> infocasts_peliculas;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_peliculasdestacas_id")
-    private PeliculaDestacada peliculasDestacadas;
+    // @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    // @JoinColumn(name = "fk_peliculasdestacas_id")
+    // private PeliculaDestacada peliculasDestacadas;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_peliculasnovedosas_id")

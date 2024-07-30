@@ -3,6 +3,9 @@ package com.netflux.spring.jpa.h2.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.netflux.spring.jpa.h2.model.Pelicula;
+import com.netflux.spring.jpa.h2.model.PeliculaDestacada;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +32,7 @@ public class infoDestacadosController {
     public ResponseEntity<List<InfoDestacados>> getAllDestacados() {
         try {
             List<InfoDestacados> listaInfoDestacados = new ArrayList<InfoDestacados>();
-            listaInfoDestacados = infoDestacadaService.getAllDestacados();
+            listaInfoDestacados = infoDestacadaService.getAllDestacadas();
 
             if (listaInfoDestacados.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -40,5 +43,23 @@ public class infoDestacadosController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    // @GetMapping("/destacados")
+    // public ResponseEntity<List<PeliculaDestacada>> getAllDestacados() {
+    // try {
+    // List<PeliculaDestacada> listaInfoDestacados = new
+    // ArrayList<PeliculaDestacada>();
+
+    // listaInfoDestacados = infoDestacadaService.getAllPeliculasDestacadas();
+
+    // // if (listaInfoDestacados.isEmpty()) {
+    // // return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    // // }
+
+    // return new ResponseEntity<>(listaInfoDestacados, HttpStatus.OK);
+    // } catch (Exception e) {
+    // return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    // }
+    // }
 
 }

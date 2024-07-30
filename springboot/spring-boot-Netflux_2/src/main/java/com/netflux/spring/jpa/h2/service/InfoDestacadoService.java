@@ -60,40 +60,13 @@ public class InfoDestacadoService {
 
         @Autowired
         private PeliculaDestacadaRepository peliculaDestacadaRepository;
-        @Autowired
-        private PeliculaRepository peliculaRepository;
 
         @Autowired
         private SerieDestacadaRepository serieDestacadaRepository;
-        @Autowired
-        private SerieRepository serieRepository;
 
-        public List<InfoDestacados> getAllDestacados() {
-
-                // Peliculas
-                // destacadas-----------------------------------------------------------------
-                List<PeliculaDestacada> peliculasDestacadas = peliculaDestacadaRepository.findAll();
-                List<Long> peliculasDestacadasIds = peliculasDestacadas.stream()
-                                .map(PeliculaDestacada::getId)
-                                .collect(Collectors.toList());
-
-                List<Pelicula> peliculasDestacadasFiltradas = peliculaRepository.findAll().stream()
-                                .filter(pelicula -> peliculasDestacadasIds.contains(pelicula.getId()))
-                                .collect(Collectors.toList());
-
-                // Series
-                // destacadas-----------------------------------------------------------------
-                List<SerieDestacada> seriesDestacadas = serieDestacadaRepository.findAll();
-                List<Long> seriesDestacadasIds = seriesDestacadas.stream()
-                                .map(SerieDestacada::getId)
-                                .collect(Collectors.toList());
-
-                List<Serie> seriesDestacadasFiltradas = serieRepository.findAll().stream()
-                                .filter(Serie -> seriesDestacadasIds.contains(Serie.getId()))
-                                .collect(Collectors.toList());
-
-                // Mapear Peliculas a InfoDestacados
-                List<InfoDestacados> infoDestacadosObjects = peliculasDestacadasFiltradas.stream()
+        public List<InfoDestacados> fromListPeliculasToInfoDestacados(List<PeliculaDestacada> peliculas) {
+                // // Mapear Peliculas a InfoDestacadas DTO
+                List<InfoDestacados> peliculasFiltradas = peliculas.stream()
                                 .map(pelicula -> {
                                         InfoDestacados infoDestacado = new InfoDestacados();
                                         infoDestacado.setId(Long.toString(pelicula.getId()));
@@ -101,35 +74,123 @@ public class InfoDestacadoService {
                                         infoDestacado.setType("film");
                                         infoDestacado.setTitle(pelicula.getTitle());
                                         infoDestacado.setImgURL(pelicula.getImgUrl());
-
-                                        // ... mapear otros campos
+                                        // // ... mapear otros campos
                                         return infoDestacado;
                                 })
                                 .collect(Collectors.toList());
 
-                // Mapear Series a InfoDestacados
-                List<InfoDestacados> infoDestacadosObjects2 = seriesDestacadasFiltradas.stream()
+                return peliculasFiltradas;
+        }
+
+        public List<InfoDestacados> fromListSeriesToInfoDestacados(List<SerieDestacada> series) {
+                // // Mapear Peliculas a InfoDestacadas DTO
+                List<InfoDestacados> seriesFiltradas = series.stream()
                                 .map(serie -> {
                                         InfoDestacados infoDestacado = new InfoDestacados();
                                         infoDestacado.setId(Long.toString(serie.getId()));
+                                        // aqui
                                         infoDestacado.setUrl(serie.getUrl());
                                         infoDestacado.setType("serie");
                                         infoDestacado.setTitle(serie.getTitle());
                                         infoDestacado.setImgURL(serie.getImgURL());
-
-                                        // ... mapear otros campos
+                                        // // ... mapear otros campos
                                         return infoDestacado;
                                 })
                                 .collect(Collectors.toList());
 
-                // concatenar Peliculas y series
-                infoDestacadosObjects.addAll(infoDestacadosObjects2);
-
-                // Check if infoDestacadosObjects is null
-                if (infoDestacadosObjects == null) {
-                        return Collections.unmodifiableList(Collections.emptyList());
-                }
-
-                return infoDestacadosObjects;
+                return seriesFiltradas;
         }
+
+        public List<InfoDestacados> getAllDestacadas() {
+                // return peliculaDestacadaRepository.findAllToInfoDestacados();
+                List<PeliculaDestacada> peliculas = peliculaDestacadaRepository.findAll();
+                List<SerieDestacada> series = serieDestacadaRepository.findAll();
+
+                List<InfoDestacados> destacados = fromListPeliculasToInfoDestacados(peliculas);
+                List<InfoDestacados> destacados2 = fromListSeriesToInfoDestacados(series);
+                destacados.addAll(destacados2);
+
+                return destacados;
+
+        }
+
+        // @Autowired
+        // private PeliculaDestacadaRepository peliculaDestacadaRepository;
+
+        // public List<PeliculaDestacada> getAllPeliculasDestacadas() {
+        // // return peliculaDestacadaRepository.findAllInfoDestacados();
+        // return peliculaDestacadaRepository.findAll();
+
+        // }
+
+        // public List<InfoDestacados> getAllDestacados() {
+
+        // // Peliculas
+        // //
+        // destacadas-----------------------------------------------------------------
+        // List<PeliculaDestacada> peliculasDestacadas =
+        // peliculaDestacadaRepository.findAll();
+        // List<Long> peliculasDestacadasIds = peliculasDestacadas.stream()
+        // .map(PeliculaDestacada::getId)
+        // .collect(Collectors.toList());
+
+        // List<Pelicula> peliculasDestacadasFiltradas =
+        // peliculaRepository.findAll().stream()
+        // .filter(pelicula -> peliculasDestacadasIds.contains(pelicula.getId()))
+        // .collect(Collectors.toList());
+
+        // // Series
+        // //
+        // destacadas-----------------------------------------------------------------
+        // List<SerieDestacada> seriesDestacadas = serieDestacadaRepository.findAll();
+        // List<Long> seriesDestacadasIds = seriesDestacadas.stream()
+        // .map(SerieDestacada::getId)
+        // .collect(Collectors.toList());
+
+        // List<Serie> seriesDestacadasFiltradas = serieRepository.findAll().stream()
+        // .filter(Serie -> seriesDestacadasIds.contains(Serie.getId()))
+        // .collect(Collectors.toList());
+
+        // // Mapear Peliculas a InfoDestacados
+        // List<InfoDestacados> infoDestacadosObjects =
+        // peliculasDestacadasFiltradas.stream()
+        // .map(pelicula -> {
+        // InfoDestacados infoDestacado = new InfoDestacados();
+        // infoDestacado.setId(Long.toString(pelicula.getId()));
+        // infoDestacado.setUrl(pelicula.getUrl());
+        // infoDestacado.setType("film");
+        // infoDestacado.setTitle(pelicula.getTitle());
+        // infoDestacado.setImgURL(pelicula.getImgUrl());
+
+        // // ... mapear otros campos
+        // return infoDestacado;
+        // })
+        // .collect(Collectors.toList());
+
+        // // Mapear Series a InfoDestacados
+        // List<InfoDestacados> infoDestacadosObjects2 =
+        // seriesDestacadasFiltradas.stream()
+        // .map(serie -> {
+        // InfoDestacados infoDestacado = new InfoDestacados();
+        // infoDestacado.setId(Long.toString(serie.getId()));
+        // infoDestacado.setUrl(serie.getUrl());
+        // infoDestacado.setType("serie");
+        // infoDestacado.setTitle(serie.getTitle());
+        // infoDestacado.setImgURL(serie.getImgURL());
+
+        // // ... mapear otros campos
+        // return infoDestacado;
+        // })
+        // .collect(Collectors.toList());
+
+        // // concatenar Peliculas y series
+        // infoDestacadosObjects.addAll(infoDestacadosObjects2);
+
+        // // Check if infoDestacadosObjects is null
+        // if (infoDestacadosObjects == null) {
+        // return Collections.unmodifiableList(Collections.emptyList());
+        // }
+
+        // return infoDestacadosObjects;
+        // }
 }

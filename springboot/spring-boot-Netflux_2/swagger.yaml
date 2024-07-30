@@ -56,6 +56,21 @@ paths:
         404:
           description: "La película no existe"
       x-swagger-router-controller: "Default"
+  /peliculas:
+    post:
+      operationId: "peliculasPOST"
+      parameters:
+        - in: "body"
+          name: "pelicula"
+          description: "Datos de la nueva película"
+          required: true
+          schema:
+            $ref: "#/definitions/InfoPelicula"  # Referencia al esquema de la película nueva
+      responses:
+        201:
+          description: "Película creada exitosamente"
+        400:
+          description: "Error al crear la película"
   /series/novedades:
     get:
       operationId: "seriesNovedadesGET"
@@ -190,3 +205,6 @@ definitions:
         type: "string"
       imgURL:
         type: "string"
+
+
+      

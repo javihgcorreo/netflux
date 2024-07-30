@@ -10,19 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-//import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.PutMapping;
-//import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.netflux.spring.jpa.h2.dto.TrailerDTO;
 import com.netflux.spring.jpa.h2.model.Trailer;
-import com.netflux.spring.jpa.h2.repository.TrailerRepository;
+import com.netflux.spring.jpa.h2.service.TrailerService;
 
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
@@ -30,8 +27,7 @@ import com.netflux.spring.jpa.h2.repository.TrailerRepository;
 public class TrailerController {
 
     @Autowired
-    TrailerRepository trailerRepository;
-    String respuesta;
+    TrailerService trailerService;
 
     // @GetMapping("/trailers/hola")
     // public String getTrailersHola() {
@@ -51,65 +47,54 @@ public class TrailerController {
     // return trailerRepository.findAll();
     // }
 
-    /*@GetMapping("/trailers")
-    public ResponseEntity<List<Trailer>> getAllTrailers() {
-        //System.out.println("Paso por aqui"); 
-        try {
-            List<Trailer> trailers = new ArrayList<Trailer>();
+    /*
+     * @GetMapping("/trailers")
+     * public ResponseEntity<List<Trailer>> getAllTrailers() {
+     * //System.out.println("Paso por aqui");
+     * try {
+     * List<Trailer> trailers = new ArrayList<Trailer>();
+     * 
+     * //trailerRepository.findAll().forEach(trailers::add);
+     * trailers = trailerRepository.findAll();
+     * if (trailers.isEmpty()) {
+     * //System.out.println(trailers.toString());
+     * return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+     * }
+     * //System.out.println(trailers.toString());
+     * 
+     * return new ResponseEntity<>(trailers, HttpStatus.OK);
+     * } catch (Exception e) {
+     * return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+     * }
+     * }
+     */
 
-            //trailerRepository.findAll().forEach(trailers::add);
-            trailers = trailerRepository.findAll();
-            if (trailers.isEmpty()) {
-                //System.out.println(trailers.toString());
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-            //System.out.println(trailers.toString()); 
+    @GetMapping("/trailers")
+    public ResponseEntity<List<TrailerDTO>> getAllTrailers() {
+        try {
+            List<TrailerDTO> trailers = new ArrayList<TrailerDTO>();
+            trailers = trailerService.getAllTrailers();
+
+            // if (trailers.isEmpty()) {
+            // return new ResponseEntity<>(HttpStatus.OK);
+            // }
 
             return new ResponseEntity<>(trailers, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }*/
 
-    @GetMapping("/trailers")
-    public ResponseEntity<List<Trailer>> getAllTrailers(@RequestParam(required
-    = false) String title) {
-        try {
-            List<Trailer> trailers = new ArrayList<Trailer>();
-
-            if (title == null)
-                trailerRepository.findAll().forEach(trailers::add);
-            else
-            trailerRepository.findByTitleContainingIgnoreCase(title).forEach(trailers::add);
-            //trailerRepository.findAll().forEach(trailers::add);
-            if (trailers.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-
-        return new ResponseEntity<>(trailers, HttpStatus.OK);
-        } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-
     @GetMapping("/trailers/{id}")
-    public ResponseEntity<List<Trailer>> getTrailersById(@PathVariable String id) {
+    public ResponseEntity<TrailerDTO> getTrailerById(@PathVariable("id") long id) {
         try {
-            List<Trailer> trailers = new ArrayList<Trailer>();
-
-            trailerRepository.findById(Integer.parseInt(id)).forEach(trailers::add);
-            
-            if (trailers.size() == 0) {
-                
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "El trailer no existe");
-            }
-        
-
-        return new ResponseEntity<>(trailers, HttpStatus.OK);
+            TrailerDTO trailerData = trailerService.getTrailerById(id);
+            return new ResponseEntity<>(trailerData, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+
     }
 
     // @GetMapping("/trailers/{id}")

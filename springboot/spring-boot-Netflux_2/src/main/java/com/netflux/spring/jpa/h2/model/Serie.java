@@ -60,9 +60,9 @@ public class Serie {
     @ManyToMany(mappedBy = "series")
     private List<Creator> creators;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_series_id")
-    private SerieDestacada seriesDestacadas;
+    // @OneToOne(cascade = CascadeType.ALL)
+    // @JoinColumn(name = "fk_series_id")
+    // private SerieDestacada seriesDestacadas;
 
     // ---Fin
     // relaciones----------------------------------------------------------------

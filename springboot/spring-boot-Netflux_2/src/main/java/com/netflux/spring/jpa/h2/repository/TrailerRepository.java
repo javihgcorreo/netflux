@@ -12,19 +12,9 @@ import com.netflux.spring.jpa.h2.repository.TrailerRepository;
 
 @Repository
 public interface TrailerRepository extends JpaRepository<Trailer, Long> {
-    // List<Trailer> findByPublished(boolean published);
 
-    // @Query("SELECT * FROM Trailer p")
     List<Trailer> findAll();
 
-    // String getTrailersHola();
-
-    // List<Trailer> findById(long id);
-
-    List<Trailer> findByTitleContainingIgnoreCase(String title);
-    //List<Trailer> findByYearFilm(Integer yearFilm);
-    List<Trailer> findById(Integer id);
-
-    // String texto = "Lo que devuelvo";
+    List<Trailer> findById(long id);
 
 }

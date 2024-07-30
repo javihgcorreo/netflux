@@ -88,12 +88,17 @@ public class SerieController {
             List<InfoSerie> series = new ArrayList<InfoSerie>();
             series = serieService.getAllSeries();
 
-            if (series.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
+            // if (series.isEmpty()) {
+            // InfoSerie serie = new InfoSerie();
+            // serie.setUrl("No hay series");
+            // series.add(serie);
+            // return new ResponseEntity<>(series, HttpStatus.OK);
+            // }
 
             return new ResponseEntity<>(series, HttpStatus.OK);
-        } catch (Exception e) {
+        } catch (
+
+        Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
