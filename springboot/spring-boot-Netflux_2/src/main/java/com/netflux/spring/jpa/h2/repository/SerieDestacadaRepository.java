@@ -14,7 +14,7 @@ public interface SerieDestacadaRepository extends JpaRepository<SerieDestacada, 
     // List<SerieDestacada> findByPublished(boolean published);
 
     // @Query("SELECT * FROM SerieDestacada p")
-    List<SerieDestacada> findAll();
+    // List<SerieDestacada> findAll();
 
     // String getSerieDestacadasHola();
 

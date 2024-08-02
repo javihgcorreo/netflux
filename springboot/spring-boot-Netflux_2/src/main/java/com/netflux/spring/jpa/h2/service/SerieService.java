@@ -58,6 +58,20 @@ public class SerieService {
                     // serie.getInfocast()
                     );
 
+                    Collection<Creator> creators = serie.getCreators();// de la serie saco los actores del cast
+
+                    List<String> creatorsObjects = creators.stream()// mapeo el cast a su DTO
+                            .map(creator -> new String(creator.getName()))
+                            .collect(Collectors.toList());
+
+                    infoSerie.setCreators(creatorsObjects);
+                    Collection<Infocast> casts = serie.getInfocast();// de la serie saco los actores del cast
+
+                    List<InfocastDTO> infoCastsObjects = casts.stream()// mapeo el cast a su DTO
+                            .map(cast -> new InfocastDTO(cast.getName(), cast.getImgUrl()))
+                            .collect(Collectors.toList());
+                    infoSerie.setInfocast(infoCastsObjects);
+
                     // ... mapear otros campos
                     return infoSerie;
                 })
@@ -78,6 +92,29 @@ public class SerieService {
     // System.err.println("intento realizar un getAllSeries en Service");
     // return serieRepository.findAll();
     // }
+
+    public List<InfoAbreviada> getAllSeriesNovedosas2() {
+
+        // Series
+        // Novedades-----------------------------------------------------------------
+        List<SerieNovedosa> seriesNovedosas = serieNovedosaRepository.findAll();
+
+        // Mapear Series a InfoAbreviada
+        List<InfoAbreviada> infoAbreviadasObjects = seriesNovedosas.stream()
+                .map(serie -> {
+                    InfoAbreviada infoAbreviada = new InfoAbreviada();
+                    infoAbreviada.setId(Long.toString(serie.getId()));
+                    infoAbreviada.setUrl(serie.getUrl());
+                    infoAbreviada.setTitle(serie.getTitle());
+                    infoAbreviada.setImgURL(serie.getImgURL());
+
+                    // ... mapear otros campos
+                    return infoAbreviada;
+                })
+                .collect(Collectors.toList());
+
+        return infoAbreviadasObjects;
+    }
 
     public List<InfoAbreviada> getAllSeriesNovedosas() {
 

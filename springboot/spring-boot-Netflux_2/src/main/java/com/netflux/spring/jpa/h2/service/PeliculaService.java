@@ -20,7 +20,7 @@ import com.netflux.spring.jpa.h2.dto.InfoAbreviada;
 
 import com.netflux.spring.jpa.h2.dto.InfoPelicula;
 import com.netflux.spring.jpa.h2.dto.InfocastDTO;
-
+import com.netflux.spring.jpa.h2.dto.PeliculaNewDTO;
 import com.netflux.spring.jpa.h2.service.PeliculaService;
 
 import java.util.List;
@@ -30,6 +30,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
+
+// import org.apache.logging.log4j.Logger;
+// import org.apache.logging.log4j.LogManager;
 
 @Service
 public class PeliculaService {
@@ -165,11 +168,43 @@ public class PeliculaService {
     // return peliculaRepository.findById(id).orElse(null);
     // }
 
-    public Pelicula savePelicula(Pelicula pelicula) {
-        return peliculaRepository.save(pelicula);
+    public Pelicula crear(PeliculaNewDTO pelicula) {
+        // logger.info(pelicula.toString());
+        System.out.println("Service:Esto es la pelicula = " + (pelicula.toString()));
+        Pelicula nuevaPelicula = pelicula.toPelicula();
+        return peliculaRepository.save(nuevaPelicula);
+    }
+
+    public InfoPelicula actualizar(Long id, InfoPelicula peliculaActualizada) {
+        try {
+            // logger.info(pelicula.toString());
+            System.out.println("Service:Esto es la pelicula = " + (peliculaActualizada.toString()));
+            // Pelicula nuevaPelicula = pelicula.toPelicula();
+
+            Optional<Pelicula> peliculaExistenteOpcional = peliculaRepository.findById(id);
+            Pelicula peliculaExistente = peliculaExistenteOpcional.orElse(new Pelicula()); // Si está vac
+
+            peliculaExistente = peliculaActualizada.toPeliculaSinInfocast();
+
+            // Actualiza los campos de la película existente
+            // peliculaExistente.setTitle(peliculaActualizada.getTitle());
+            // peliculaExistente.setDirector(peliculaActualizada.getDirector());
+            // peliculaExistente.setUrl(peliculaActualizada.getUrl());
+            // peliculaExistente.setImgUrl(peliculaActualizada.getImgURL());
+            // peliculaExistente.setDescription(peliculaActualizada.getDescription());
+            // peliculaExistente.setYearFilm(peliculaActualizada.getYear());
+            // peliculaExistente.setDuration(peliculaActualizada.getDuration());
+
+            return (peliculaRepository.save(peliculaExistente)).toInfoPeliculaSinInfocast();
+        } catch (Exception e) {
+            // TODO: handle exception
+            return null;
+        }
+
     }
 
     public void deletePelicula(Long id) {
         peliculaRepository.deleteById(id);
     }
+
 }

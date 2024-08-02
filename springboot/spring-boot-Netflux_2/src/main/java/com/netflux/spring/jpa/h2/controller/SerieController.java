@@ -158,6 +158,23 @@ public class SerieController {
         }
     }
 
+    @GetMapping("/series/novedades2")
+    public ResponseEntity<List<InfoAbreviada>> getAllSeriesNovedosas2() {
+        try {
+            List<InfoAbreviada> series = new ArrayList<InfoAbreviada>();
+            series = serieService.getAllSeriesNovedosas2();
+
+            // if (peliculas.isEmpty()) {
+            // return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            // }
+
+            return new ResponseEntity<>(series, HttpStatus.OK);
+        } catch (Exception e) {
+
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping("/series/{id}")
     public ResponseEntity<InfoSerie> getSerieById(@PathVariable("id") long id) {
         try {

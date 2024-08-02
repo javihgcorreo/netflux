@@ -1,5 +1,8 @@
 package com.netflux.spring.jpa.h2.dto;
 
+import com.netflux.spring.jpa.h2.model.Infocast;
+import com.netflux.spring.jpa.h2.model.Pelicula;
+
 import java.util.Collection;
 
 import lombok.Data;
@@ -21,6 +24,10 @@ public class InfoPelicula {
     private Collection<InfocastDTO> cast;
 
     // Constructor
+
+    public InfoPelicula() {
+    }
+
     public InfoPelicula(String id, String url, String imgURL, String title,
             String description, Integer year, Integer duration,
             String director, Collection<InfocastDTO> cast) {
@@ -36,5 +43,19 @@ public class InfoPelicula {
     }
 
     // Getters y Setters
+
+    // Otros métodos
+    public Pelicula toPeliculaSinInfocast() {
+        Pelicula pelicula = new Pelicula();
+        pelicula.setId(Long.parseLong(id));
+        pelicula.setUrl(url);
+        pelicula.setImgUrl(imgURL);
+        pelicula.setTitle(title);
+        pelicula.setDescription(description);
+        pelicula.setYearFilm(year);
+        pelicula.setDuration(duration);
+        pelicula.setDirector(director);
+        return pelicula;
+    }
 
 }

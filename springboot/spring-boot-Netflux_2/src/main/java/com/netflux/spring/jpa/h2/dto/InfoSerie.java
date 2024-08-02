@@ -1,6 +1,8 @@
 package com.netflux.spring.jpa.h2.dto;
 
 import java.util.Collection;
+import java.util.List;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +20,6 @@ public class InfoSerie {
     private Integer yearEnd;
     private Integer seasons;
 
-    private String director;
     private Collection<String> creators;
 
     private Collection<InfocastDTO> cast;
@@ -44,5 +45,12 @@ public class InfoSerie {
     }
 
     // Getters y Setters
+    public void setCreators(List<String> creators) {
+        this.creators = creators;
+    }
+
+    public void setInfocast(List<InfocastDTO> cast) {
+        this.cast = cast;
+    }
 
 }

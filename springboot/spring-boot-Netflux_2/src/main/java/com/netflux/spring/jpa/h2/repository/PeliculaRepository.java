@@ -1,5 +1,7 @@
 package com.netflux.spring.jpa.h2.repository;
 
+import com.netflux.spring.jpa.h2.dto.PeliculaNewDTO;
+
 import java.util.List;
 
 //import java.util.Optional;
@@ -21,5 +23,7 @@ public interface PeliculaRepository extends JpaRepository<Pelicula, Long> {
     List<Pelicula> findAll();
 
     Pelicula findById(long id);
+
+    Pelicula save(PeliculaNewDTO pelicula);
 
 }

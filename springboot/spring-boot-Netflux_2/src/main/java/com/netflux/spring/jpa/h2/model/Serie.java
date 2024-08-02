@@ -67,20 +67,19 @@ public class Serie {
     // ---Fin
     // relaciones----------------------------------------------------------------
 
-    // public Serie(String url, String imgURL, String title, String description,
-    // Integer yearstart, Integer yearend, Integer seasons, List<Infocast>
-    // infocasts, List<Creator> creators) {
-    // // this.id = id;
-    // this.url = url;
-    // this.imgURL = imgURL;
-    // this.title = title;
-    // this.description = description;
-    // this.yearstart = yearstart;
-    // this.yearend = yearend;
-    // this.seasons = seasons;
-    // this.series_infocasts = infocasts;
-    // this.creators = creators;
-    // }
+    public Serie(String url, String imgURL, String title, String description,
+            Integer yearstart, Integer yearend, Integer seasons, List<Infocast> infocasts, List<Creator> creators) {
+        // this.id = id;
+        this.url = url;
+        this.imgURL = imgURL;
+        this.title = title;
+        this.description = description;
+        this.yearstart = yearstart;
+        this.yearend = yearend;
+        this.seasons = seasons;
+        this.series_infocasts = infocasts;
+        this.creators = creators;
+    }
 
     public long getId() {
         return id;

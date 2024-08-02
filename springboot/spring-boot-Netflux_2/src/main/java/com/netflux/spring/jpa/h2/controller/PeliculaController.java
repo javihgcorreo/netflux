@@ -12,11 +12,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-//import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.PutMapping;
-//import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -24,7 +26,10 @@ import org.springframework.web.server.ResponseStatusException;
 import com.netflux.spring.jpa.h2.model.Pelicula;
 import com.netflux.spring.jpa.h2.repository.PeliculaRepository;
 import com.netflux.spring.jpa.h2.service.PeliculaService;
+import com.netflux.spring.jpa.h2.dto.PeliculaNewDTO;
+
 import com.netflux.spring.jpa.h2.dto.InfoPelicula;
+
 import com.netflux.spring.jpa.h2.dto.InfoAbreviada;
 
 @CrossOrigin(origins = "http://localhost:8081")
@@ -104,36 +109,68 @@ public class PeliculaController {
 
     }
 
-    // @PostMapping("/peliculas")
-    // public ResponseEntity<Pelicula> createPelicula(@RequestBody Pelicula
-    // Pelicula) {
-    // try {
-    // Pelicula _Pelicula = PeliculaRepository
-    // .save(new Pelicula(Pelicula.getTitle(), Pelicula.getDescription(), false));
-    // return new ResponseEntity<>(_Pelicula, HttpStatus.CREATED);
-    // } catch (Exception e) {
-    // return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-    // }
+    @PostMapping("/peliculas")
+    public ResponseEntity<Pelicula> createPelicula(@RequestBody PeliculaNewDTO pelicula_body) {
+        try {
+            // Pelicula _Pelicula = PeliculaService
+            // .save(new Pelicula(Pelicula.getTitle(), Pelicula.getDescription(), false));
+            PeliculaNewDTO datosPelicula = new PeliculaNewDTO(
+                    pelicula_body.getUrl(),
+                    pelicula_body.getImgURL(),
+                    pelicula_body.getTitle(),
+                    pelicula_body.getDescription(),
+                    pelicula_body.getYear(),
+                    pelicula_body.getDuration(),
+                    pelicula_body.getDirector());
+            // pelicula_body.getCast());
+            System.out.println("Controller:Esto es la pelicula = " + (pelicula_body.toString()));
+            System.out.println("Controller:pelicula procesada = " + (datosPelicula.toString()));
+
+            Pelicula _pelicula = peliculaService.crear(datosPelicula);
+            // Pelicula _pelicula = null;
+            return new ResponseEntity<>(_pelicula, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    // @PostMapping("/test")
+    // public String testForm(UserForm form) {
+    // return "Form received";
     // }
 
-    /*
-     * @PutMapping("/peliculas/{id}")
-     * public ResponseEntity<Pelicula> updatePelicula(@PathVariable("id") long
-     * id, @RequestBody Pelicula Pelicula) {
-     * Optional<Pelicula> PeliculaData = PeliculaRepository.findById(id);
-     * 
-     * if (PeliculaData.isPresent()) {
-     * Pelicula _Pelicula = PeliculaData.get();
-     * _Pelicula.setTitle(Pelicula.getTitle());
-     * _Pelicula.setDescription(Pelicula.getDescription());
-     * _Pelicula.setPublished(Pelicula.isPublished());
-     * return new ResponseEntity<>(PeliculaRepository.save(_Pelicula),
-     * HttpStatus.OK);
-     * } else {
-     * return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-     * }
-     * }
-     */
+    @PutMapping("/peliculas/{id}")
+    public ResponseEntity<InfoPelicula> updatePelicula(@PathVariable("id") long id,
+            @RequestBody InfoPelicula pelicula_body) {
+        try {
+
+            System.out.println("Controller:Esto es la pelicula = " + (pelicula_body.toString()));
+
+            // pelicula_body.setUrl(pelicula_body.getUrl());
+            // pelicula_body.setImgURL(pelicula_body.getImgURL());
+
+            InfoPelicula _infoPelicula = peliculaService.actualizar(id, pelicula_body);
+            // Pelicula _pelicula = null;
+            return new ResponseEntity<>(_infoPelicula, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    // @PutMapping("/{id}")
+    // public ResponseEntity<Pelicula> actualizarPelicula(@PathVariable Long id,
+    // @Valid @RequestBody Pelicula peliculaActualizada) {
+    // try {
+    // Pelicula peliculaActualizada = peliculaService.actualizarPelicula(id,
+    // peliculaActualizada);
+    // return ResponseEntity.ok(peliculaActualizada);
+    // } catch (PeliculaNotFoundException e) {
+    // return ResponseEntity.notFound().build();
+    // } catch (Exception e) {
+    // return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();  
+
+    // }
+    // }
 
     @DeleteMapping("/peliculas/{id}")
     public ResponseEntity<HttpStatus> deletePelicula(@PathVariable("id") long id) {

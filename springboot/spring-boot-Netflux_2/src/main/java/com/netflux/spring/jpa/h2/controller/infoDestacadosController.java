@@ -34,9 +34,9 @@ public class infoDestacadosController {
             List<InfoDestacados> listaInfoDestacados = new ArrayList<InfoDestacados>();
             listaInfoDestacados = infoDestacadaService.getAllDestacadas();
 
-            if (listaInfoDestacados.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
+            // if (listaInfoDestacados.isEmpty()) {
+            // return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            // }
 
             return new ResponseEntity<>(listaInfoDestacados, HttpStatus.OK);
         } catch (Exception e) {

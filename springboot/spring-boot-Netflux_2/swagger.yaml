@@ -205,6 +205,33 @@ definitions:
         type: "string"
       imgURL:
         type: "string"
+        
+  #add for me
+  InfoSerieNew:
+    type: "object"
+    properties:
+      url:
+        type: "string"
+      imgURL:
+        type: "string"
+      title:
+        type: "string"
+      description:
+        type: "string"
+      yearStart:
+        type: "integer"
+      yearEnd:
+        type: "integer"
+      seasons:
+        type: "integer"
+      creators:
+        type: "array"
+        items:
+          type: "string"
+      cast:
+        type: "array"
+        items:
+          $ref: "#/definitions/InfoCast"
 
 
       

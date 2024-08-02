@@ -3,6 +3,8 @@ package com.netflux.spring.jpa.h2.model;
 //import org.hibernate.mapping.List;
 import java.util.List;
 
+import com.netflux.spring.jpa.h2.dto.InfoPelicula;
+
 //import org.hibernate.mapping.List;
 
 import jakarta.persistence.*;
@@ -62,9 +64,9 @@ public class Pelicula {
     // @JoinColumn(name = "fk_peliculasdestacas_id")
     // private PeliculaDestacada peliculasDestacadas;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_peliculasnovedosas_id")
-    private PeliculaNovedosa peliculasNovedades;
+    // @OneToOne(cascade = CascadeType.ALL)
+    // @JoinColumn(name = "fk_peliculasnovedosas_id")
+    // private PeliculaNovedosa peliculasNovedades;
 
     // --Fin relaciones
 
@@ -79,6 +81,17 @@ public class Pelicula {
         this.duration = duration;
         this.director = director;
         this.infocasts_peliculas = infocasts;
+    }
+
+    public Pelicula(String url, String imgURL, String title, String description,
+            Integer yearFilm, Integer duration, String director) {
+        this.url = url;
+        this.imgURL = imgURL;
+        this.title = title;
+        this.description = description;
+        this.yearFilm = yearFilm;
+        this.duration = duration;
+        this.director = director;
     }
 
     public long getId() {
@@ -151,6 +164,21 @@ public class Pelicula {
 
     public void setInfocast(List<Infocast> infocasts) {
         this.infocasts_peliculas = infocasts;
+    }
+
+    // otros métodos
+    // Otros métodos
+    public InfoPelicula toInfoPeliculaSinInfocast() {
+        InfoPelicula pelicula = new InfoPelicula();
+        pelicula.setId(Long.toString(id));
+        pelicula.setUrl(url);
+        pelicula.setImgURL(imgURL);
+        pelicula.setTitle(title);
+        pelicula.setDescription(description);
+        pelicula.setYear(yearFilm);
+        pelicula.setDuration(duration);
+        pelicula.setDirector(director);
+        return pelicula;
     }
 
 }

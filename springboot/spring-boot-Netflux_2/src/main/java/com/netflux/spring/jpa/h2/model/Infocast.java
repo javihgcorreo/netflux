@@ -2,6 +2,8 @@ package com.netflux.spring.jpa.h2.model;
 
 import java.util.List;
 
+import com.netflux.spring.jpa.h2.dto.InfocastDTO;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -58,6 +60,11 @@ public class Infocast {
 
     public void setImgUrl(String imgURL) {
         this.imgURL = imgURL;
+    }
+
+    // otros métodos
+    public InfocastDTO toInfocastDTO() {
+        return new InfocastDTO(name, imgURL);
     }
 
 }
