@@ -175,7 +175,7 @@ public class PeliculaService {
         return peliculaRepository.save(nuevaPelicula);
     }
 
-    public InfoPelicula actualizar(Long id, InfoPelicula peliculaActualizada) {
+    public ResponseEntity<InfoPelicula> actualizar(Long id, InfoPelicula peliculaActualizada) {
         try {
             // logger.info(pelicula.toString());
             System.out.println("Service:Esto es la pelicula = " + (peliculaActualizada.toString()));
@@ -186,19 +186,11 @@ public class PeliculaService {
 
             peliculaExistente = peliculaActualizada.toPeliculaSinInfocast();
 
-            // Actualiza los campos de la película existente
-            // peliculaExistente.setTitle(peliculaActualizada.getTitle());
-            // peliculaExistente.setDirector(peliculaActualizada.getDirector());
-            // peliculaExistente.setUrl(peliculaActualizada.getUrl());
-            // peliculaExistente.setImgUrl(peliculaActualizada.getImgURL());
-            // peliculaExistente.setDescription(peliculaActualizada.getDescription());
-            // peliculaExistente.setYearFilm(peliculaActualizada.getYear());
-            // peliculaExistente.setDuration(peliculaActualizada.getDuration());
-
-            return (peliculaRepository.save(peliculaExistente)).toInfoPeliculaSinInfocast();
+            return new ResponseEntity<>((peliculaRepository.save(peliculaExistente)).toInfoPeliculaSinInfocast(),
+                    HttpStatus.OK);
         } catch (Exception e) {
             // TODO: handle exception
-            return null;
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }

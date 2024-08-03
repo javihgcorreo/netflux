@@ -145,13 +145,9 @@ public class PeliculaController {
         try {
 
             System.out.println("Controller:Esto es la pelicula = " + (pelicula_body.toString()));
-
-            // pelicula_body.setUrl(pelicula_body.getUrl());
-            // pelicula_body.setImgURL(pelicula_body.getImgURL());
-
-            InfoPelicula _infoPelicula = peliculaService.actualizar(id, pelicula_body);
+            ResponseEntity<InfoPelicula> _infoPelicula = peliculaService.actualizar(id, pelicula_body);
             // Pelicula _pelicula = null;
-            return new ResponseEntity<>(_infoPelicula, HttpStatus.OK);
+            return _infoPelicula;
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
