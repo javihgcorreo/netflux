@@ -16,6 +16,7 @@ import lombok.Builder;
 @Builder
 @Entity
 @Table(name = "series")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Serie {
     /*
      * @Id

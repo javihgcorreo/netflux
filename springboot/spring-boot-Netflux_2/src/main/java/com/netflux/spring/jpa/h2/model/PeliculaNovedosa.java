@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "peliculasnovedades") // aunque haya warnig illegal uso dejarlo para crearla
+@Inheritance(strategy = InheritanceType.JOINED)
 public class PeliculaNovedosa extends Pelicula {
 
     // @Id

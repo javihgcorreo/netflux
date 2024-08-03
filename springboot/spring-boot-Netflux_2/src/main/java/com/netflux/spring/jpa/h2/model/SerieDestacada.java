@@ -15,6 +15,7 @@ import lombok.Setter;
 @Getter
 @Entity
 @Table(name = "seriesdestacadas")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class SerieDestacada extends Serie {
 
     // @Id

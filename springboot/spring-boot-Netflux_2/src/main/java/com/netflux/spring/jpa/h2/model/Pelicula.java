@@ -20,6 +20,7 @@ import lombok.Builder;
 @Entity
 @Table(name = "peliculas")
 @Inheritance(strategy = InheritanceType.JOINED)
+// @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Pelicula {
     /*
      * @Id
@@ -33,25 +34,25 @@ public class Pelicula {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "url", length = 255, nullable = false)
+    @Column(name = "url", length = 255, nullable = true)
     private String url;
 
-    @Column(name = "img_url", length = 255, nullable = false)
+    @Column(name = "img_url", length = 255, nullable = true)
     private String imgURL;
 
-    @Column(name = "title", length = 255, nullable = false)
+    @Column(name = "title", length = 255, nullable = true)
     private String title;
 
-    @Column(name = "description", length = 255, nullable = false)
+    @Column(name = "description", length = 255, nullable = true)
     private String description;
 
-    @Column(name = "year_film", nullable = false)
+    @Column(name = "year_film", nullable = true)
     private Integer yearFilm;
 
-    @Column(name = "duration", nullable = false)
+    @Column(name = "duration", nullable = true)
     private Integer duration;
 
-    @Column(name = "director", length = 255, nullable = false)
+    @Column(name = "director", length = 255, nullable = true)
     private String director;
 
     // --Relaciones y sus atributos
