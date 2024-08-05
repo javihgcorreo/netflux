@@ -35,6 +35,13 @@ public class Infocast {
 
     // fin relaciones---------------------------------
 
+    public Infocast(Long id, String name, String imgURL) {
+        this.id = id;
+        this.name = name;
+        this.imgURL = imgURL;
+        // this.cast = cast;
+    }
+
     public Infocast(String name, String imgURL) {
         // this.id = id;
         this.name = name;
@@ -44,6 +51,10 @@ public class Infocast {
 
     public long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

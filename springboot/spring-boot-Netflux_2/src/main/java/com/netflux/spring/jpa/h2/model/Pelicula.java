@@ -167,7 +167,6 @@ public class Pelicula {
         this.infocasts_peliculas = infocasts;
     }
 
-    // otros métodos
     // Otros métodos
     public InfoPelicula toInfoPeliculaSinInfocast() {
         InfoPelicula pelicula = new InfoPelicula();

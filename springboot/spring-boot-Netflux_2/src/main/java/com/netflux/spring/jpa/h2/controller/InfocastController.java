@@ -89,13 +89,14 @@ public class InfocastController {
     }
 
     @PutMapping("/infocasts/{id}")
-    public ResponseEntity<Infocast> updateInfocast(@PathVariable("id") long id,
-            @RequestBody Infocast infocast_body) {
+    public ResponseEntity<InfocastDTO> updateInfocast(@PathVariable("id") long id,
+            @RequestBody InfocastDTO infocast_body) {
         try {
 
             System.out.println("Controller:Esto es la infocast = " + (infocast_body.toString()));
-            ResponseEntity<Infocast> _Infocast = infocastService.actualizar(id, infocast_body);
+            ResponseEntity<InfocastDTO> _Infocast = infocastService.actualizar(id, infocast_body);
             // Infocast _infocast = null;
+
             return _Infocast;
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

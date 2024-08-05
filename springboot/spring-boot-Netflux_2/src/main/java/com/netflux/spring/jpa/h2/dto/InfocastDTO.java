@@ -40,6 +40,7 @@ public class InfocastDTO {
     }
 
     // otros métodos
+
     public Infocast toInfocast() {
         Infocast nueva = new Infocast(
                 this.name,

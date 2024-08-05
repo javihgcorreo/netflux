@@ -68,8 +68,33 @@ public class TrailerService {
 
     }
 
-    public Trailer saveTrailer(Trailer trailer) {
-        return trailerRepository.save(trailer);
+    public Trailer crear(TrailerDTO trailer) {
+        // logger.info(trailer.toString());
+        System.out.println("Service:Esto es la trailer = " + (trailer.toString()));
+        Trailer nuevaTrailer = trailer.toTrailer();
+        System.out.println("Service:Despues de trailerDTO");
+
+        return trailerRepository.save(nuevaTrailer);
+    }
+
+    public ResponseEntity<TrailerDTO> actualizar(Long id, TrailerDTO trailerActualizada) {
+        try {
+            // logger.info(trailer.toString());
+            System.out.println("Service:Esto es la trailer = " + (trailerActualizada.toString()));
+            // Trailer nuevaTrailer = trailer.toTrailer();
+
+            Optional<Trailer> trailerExistenteOpcional = trailerRepository.findById(id);
+            Trailer trailerExistente = trailerExistenteOpcional.orElse(new Trailer()); // Si está vac
+
+            trailerExistente = trailerActualizada.toTrailer();
+
+            return new ResponseEntity<>((trailerRepository.save(trailerExistente)).toTrailerDTOSinInfocast(),
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            // TODO: handle exception
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     public void deleteTrailer(Long id) {

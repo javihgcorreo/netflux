@@ -76,7 +76,7 @@ public class InfocastService {
         return infocastRepository.save(nuevaInfocast);
     }
 
-    public ResponseEntity<Infocast> actualizar(Long id, Infocast infocastActualizada) {
+    public ResponseEntity<InfocastDTO> actualizar(Long id, InfocastDTO infocastActualizada) {
         try {
             // logger.info(infocast.toString());
             System.out.println("Service:Esto es la infocast = " + (infocastActualizada.toString()));
@@ -85,7 +85,10 @@ public class InfocastService {
             Optional<Infocast> infocastExistenteOpcional = infocastRepository.findById(id);
             Infocast infocastExistente = infocastExistenteOpcional.orElse(new Infocast()); // Si está vac
 
-            return new ResponseEntity<>((infocastRepository.save(infocastExistente)),
+            infocastExistente = infocastActualizada.toInfocast();
+            infocastExistente.setId(id);
+
+            return new ResponseEntity<>((infocastRepository.save(infocastExistente).toInfocastDTO()),
                     HttpStatus.OK);
         } catch (Exception e) {
             // TODO: handle exception

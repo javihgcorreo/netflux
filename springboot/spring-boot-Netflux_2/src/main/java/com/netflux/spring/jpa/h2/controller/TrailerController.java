@@ -10,8 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,46 +32,6 @@ public class TrailerController {
 
     @Autowired
     TrailerService trailerService;
-
-    // @GetMapping("/trailers/hola")
-    // public String getTrailersHola() {
-    // List<Trailer> trailers = trailerRepository.findAll();
-    // respuesta = "Trailers";
-    // return respuesta;
-    // }
-
-    // @GetMapping("/trailers/prueba")
-    // public List<Trailer> getTrailers() {
-    // if (trailerRepository.count() > 0) {
-    // // El `TrailerRepository` tiene elementos.
-    // System.out.println(trailerRepository.count() + " <-esto el count");
-    // System.out.println(" <-esto el count XXXX");
-
-    // }
-    // return trailerRepository.findAll();
-    // }
-
-    /*
-     * @GetMapping("/trailers")
-     * public ResponseEntity<List<Trailer>> getAllTrailers() {
-     * //System.out.println("Paso por aqui");
-     * try {
-     * List<Trailer> trailers = new ArrayList<Trailer>();
-     * 
-     * //trailerRepository.findAll().forEach(trailers::add);
-     * trailers = trailerRepository.findAll();
-     * if (trailers.isEmpty()) {
-     * //System.out.println(trailers.toString());
-     * return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-     * }
-     * //System.out.println(trailers.toString());
-     * 
-     * return new ResponseEntity<>(trailers, HttpStatus.OK);
-     * } catch (Exception e) {
-     * return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-     * }
-     * }
-     */
 
     @GetMapping("/trailers")
     public ResponseEntity<List<TrailerDTO>> getAllTrailers() {
@@ -97,75 +61,42 @@ public class TrailerController {
 
     }
 
-    // @GetMapping("/trailers/{id}")
-    // public ResponseEntity<Trailer> getTrailerById(@PathVariable("id") long id)
-    // {
-    // Optional<Trailer> trailerData = trailerRepository.findById(id);
+    @PostMapping("/trailers")
+    public ResponseEntity<TrailerDTO> createTrailer(@RequestBody TrailerDTO trailer_body) {
+        try {
+            System.out.println("Controller:Esto es la trailer = " + (trailer_body.toString()));
 
-    // if (trailerData.isPresent()) {
-    // return new ResponseEntity<>(trailerData.get(), HttpStatus.OK);
-    // } else {
-    // return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    // }
-    // }
+            Trailer _trailer = trailerService.crear(trailer_body);
+            // Trailer _trailer = null;
+            return new ResponseEntity<>(_trailer.toTrailerDTOSinInfocast(), HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
-    /*
-     * @PostMapping("/trailers")
-     * public ResponseEntity<Trailer> createTrailer(@RequestBody Trailer
-     * Trailer) {
-     * try {
-     * Trailer _Trailer = TrailerRepository.save(new
-     * Trailer(Trailer.getTitle(), Trailer.getDescription(), false));
-     * return new ResponseEntity<>(_Trailer, HttpStatus.CREATED);
-     * } catch (Exception e) {
-     * return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-     * }
-     * }
-     */
+    @PutMapping("/trailers/{id}")
+    public ResponseEntity<TrailerDTO> updateTrailer(@PathVariable("id") long id,
+            @RequestBody TrailerDTO trailer_body) {
+        try {
 
-    /*
-     * @PutMapping("/trailers/{id}")
-     * public ResponseEntity<Trailer> updateTrailer(@PathVariable("id") long
-     * id, @RequestBody Trailer Trailer) {
-     * Optional<Trailer> TrailerData = TrailerRepository.findById(id);
-     * 
-     * if (TrailerData.isPresent()) {
-     * Trailer _Trailer = TrailerData.get();
-     * _Trailer.setTitle(Trailer.getTitle());
-     * _Trailer.setDescription(Trailer.getDescription());
-     * _Trailer.setPublished(Trailer.isPublished());
-     * return new ResponseEntity<>(TrailerRepository.save(_Trailer),
-     * HttpStatus.OK);
-     * } else {
-     * return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-     * }
-     * }
-     */
+            System.out.println("Controller:Esto es la trailer = " + (trailer_body.toString()));
+            ResponseEntity<TrailerDTO> _Trailer = trailerService.actualizar(id, trailer_body);
+            // Trailer _trailer = null;
+            return _Trailer;
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
-    /*
-     * @DeleteMapping("/trailers/{id}")
-     * public ResponseEntity<HttpStatus> deleteTrailer(@PathVariable("id") long id)
-     * {
-     * try {
-     * TrailerRepository.deleteById(id);
-     * return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-     * } catch (Exception e) {
-     * return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-     * }
-     * }
-     */
+    @DeleteMapping("/trailers/{id}")
+    public ResponseEntity<HttpStatus> deleteTrailer(@PathVariable("id") long id) {
+        try {
 
-    /*
-     * @DeleteMapping("/trailers")
-     * public ResponseEntity<HttpStatus> deleteAllTrailers() {
-     * try {
-     * TrailerRepository.deleteAll();
-     * return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-     * } catch (Exception e) {
-     * return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-     * }
-     * 
-     * }
-     */
+            trailerService.deleteTrailer(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }
