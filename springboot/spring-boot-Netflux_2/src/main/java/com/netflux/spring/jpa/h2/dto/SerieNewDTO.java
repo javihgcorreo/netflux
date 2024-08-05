@@ -12,8 +12,7 @@ import lombok.Setter;
 @Data
 @Setter
 @Getter
-public class InfoSerie {
-    private String id;
+public class SerieNewDTO {
     private String url;
     private String imgURL;
     private String title;
@@ -21,20 +20,17 @@ public class InfoSerie {
     private Integer yearStart;
     private Integer yearEnd;
     private Integer seasons;
-
     private Collection<String> creators;
-
     private Collection<InfocastDTO> cast;
 
-    // Constructores
-    public InfoSerie() {
+    // Constructor
+    public SerieNewDTO() {
 
     }
 
-    public InfoSerie(String id, String url, String imgURL, String title,
+    public SerieNewDTO(String url, String imgURL, String title,
             String description, Integer yearStart, Integer yearEnd, Integer seasons,
             Collection<String> creators, Collection<InfocastDTO> cast) {
-        this.id = id;
         this.url = url;
         this.imgURL = imgURL;
         this.title = title;
@@ -46,27 +42,29 @@ public class InfoSerie {
         this.cast = cast;
     }
 
+    public SerieNewDTO(String url, String imgURL, String title,
+            String description, Integer yearStart, Integer yearEnd, Integer seasons) {
+        this.url = url;
+        this.imgURL = imgURL;
+        this.title = title;
+        this.description = description;
+        this.yearStart = yearStart;
+        this.yearEnd = yearEnd;
+        this.seasons = seasons;
+    }
+
     // Getters y Setters
-    public void setCreators(List<String> creators) {
-        this.creators = creators;
-    }
 
-    public void setInfocast(List<InfocastDTO> cast) {
-        this.cast = cast;
-    }
-
-    // Otros métodos
-    public Serie toSerieSinInfocast() {
-        Serie serie = new Serie();
-        serie.setId(Long.parseLong(id));
-        serie.setUrl(url);
-        serie.setImgURL(imgURL);
-        serie.setTitle(title);
-        serie.setDescription(description);
-        serie.setYearStart(yearStart);
-        serie.setYearEnd(yearEnd);
-        serie.setSeasons(seasons);
-        return serie;
+    public Serie toSerie() {
+        Serie nueva = new Serie(
+                this.url,
+                this.imgURL,
+                this.title,
+                this.description,
+                this.yearStart,
+                this.yearEnd,
+                this.seasons);
+        return nueva;
     }
 
 }

@@ -1,6 +1,8 @@
 package com.netflux.spring.jpa.h2.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.netflux.spring.jpa.h2.repository.SerieNovedosaRepository;
@@ -9,6 +11,8 @@ import com.netflux.spring.jpa.h2.dto.InfoAbreviada;
 import com.netflux.spring.jpa.h2.dto.InfoPelicula;
 import com.netflux.spring.jpa.h2.dto.InfoSerie;
 import com.netflux.spring.jpa.h2.dto.InfocastDTO;
+import com.netflux.spring.jpa.h2.dto.PeliculaNewDTO;
+import com.netflux.spring.jpa.h2.dto.SerieNewDTO;
 import com.netflux.spring.jpa.h2.model.Infocast;
 import com.netflux.spring.jpa.h2.model.Pelicula;
 import com.netflux.spring.jpa.h2.model.Serie;
@@ -179,6 +183,33 @@ public class SerieService {
         return infoSerie;
 
         // return serieRepository.findById(id).orElse(null);
+
+    }
+
+    public Serie crear(SerieNewDTO serie) {
+        // logger.info(serie.toString());
+        System.out.println("Service:Esto es la serie = " + (serie.toString()));
+        Serie nuevaSerie = serie.toSerie();
+        return serieRepository.save(nuevaSerie);
+    }
+
+    public ResponseEntity<InfoSerie> actualizar(Long id, InfoSerie serieActualizada) {
+        try {
+            // logger.info(serie.toString());
+            System.out.println("Service:Esto es la serie = " + (serieActualizada.toString()));
+            // Serie nuevaSerie = serie.toSerie();
+
+            Optional<Serie> serieExistenteOpcional = serieRepository.findById(id);
+            Serie serieExistente = serieExistenteOpcional.orElse(new Serie()); // Si está vac
+
+            serieExistente = serieActualizada.toSerieSinInfocast();
+
+            return new ResponseEntity<>((serieRepository.save(serieExistente)).toInfoSerieSinInfocast(),
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            // TODO: handle exception
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
     }
 

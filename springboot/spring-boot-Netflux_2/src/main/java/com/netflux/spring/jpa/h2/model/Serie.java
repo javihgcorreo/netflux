@@ -2,6 +2,8 @@ package com.netflux.spring.jpa.h2.model;
 
 import java.util.List;
 
+import com.netflux.spring.jpa.h2.dto.InfoSerie;
+
 //import org.hibernate.mapping.List;
 
 import jakarta.persistence.*;
@@ -29,25 +31,25 @@ public class Serie {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "url", length = 255, nullable = false)
+    @Column(name = "url", length = 255, nullable = true)
     private String url;
 
-    @Column(name = "img_url", length = 255, nullable = false)
+    @Column(name = "img_url", length = 255, nullable = true)
     private String imgURL;
 
-    @Column(name = "title", length = 255, nullable = false)
+    @Column(name = "title", length = 255, nullable = true)
     private String title;
 
-    @Column(name = "description", length = 255, nullable = false)
+    @Column(name = "description", length = 255, nullable = true)
     private String description;
 
-    @Column(name = "yearstart", nullable = false)
+    @Column(name = "yearstart", nullable = true)
     private Integer yearstart;
 
-    @Column(name = "yearend", nullable = false)
+    @Column(name = "yearend", nullable = true)
     private Integer yearend;
 
-    @Column(name = "seasons", nullable = false)
+    @Column(name = "seasons", nullable = true)
     private Integer seasons;
 
     // ---Relaciones y sus
@@ -80,6 +82,17 @@ public class Serie {
         this.seasons = seasons;
         this.series_infocasts = infocasts;
         this.creators = creators;
+    }
+
+    public Serie(String url, String imgURL, String title, String description,
+            Integer yearstart, Integer yearend, Integer seasons) {
+        this.url = url;
+        this.imgURL = imgURL;
+        this.title = title;
+        this.description = description;
+        this.yearstart = yearstart;
+        this.yearend = yearend;
+        this.seasons = seasons;
     }
 
     public long getId() {
@@ -156,6 +169,21 @@ public class Serie {
 
     public void setCreators(List<Creator> creators) {
         this.creators = creators;
+    }
+
+    // Otros métodos
+    public InfoSerie toInfoSerieSinInfocast() {
+        InfoSerie serie = new InfoSerie();
+        serie.setId(Long.toString(id));
+        serie.setUrl(url);
+        serie.setImgURL(imgURL);
+        serie.setTitle(title);
+        serie.setDescription(description);
+        serie.setYearStart(yearstart);
+        serie.setYearEnd(yearend);
+
+        serie.setSeasons(seasons);
+        return serie;
     }
 
 }

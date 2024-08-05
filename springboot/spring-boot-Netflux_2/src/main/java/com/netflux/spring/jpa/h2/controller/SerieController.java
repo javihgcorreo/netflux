@@ -9,9 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-//import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 //import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.PutMapping;
 //import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +26,8 @@ import org.springframework.web.server.ResponseStatusException;
 import com.netflux.spring.jpa.h2.dto.InfoAbreviada;
 import com.netflux.spring.jpa.h2.dto.InfoPelicula;
 import com.netflux.spring.jpa.h2.dto.InfoSerie;
-
+import com.netflux.spring.jpa.h2.dto.PeliculaNewDTO;
+import com.netflux.spring.jpa.h2.dto.SerieNewDTO;
 import com.netflux.spring.jpa.h2.model.Pelicula;
 import com.netflux.spring.jpa.h2.model.Serie;
 import com.netflux.spring.jpa.h2.repository.SerieRepository;
@@ -41,46 +45,6 @@ public class SerieController {
     SerieService serieService;
 
     String respuesta;
-
-    // @GetMapping("/series/hola")
-    // public String getSeriesHola() {
-    // List<Serie> series = serieRepository.findAll();
-    // respuesta = "Series";
-    // return respuesta;
-    // }
-
-    // @GetMapping("/series/prueba")
-    // public List<Serie> getSeries() {
-    // if (serieRepository.count() > 0) {
-    // // El `SerieRepository` tiene elementos.
-    // System.out.println(serieRepository.count() + " <-esto el count");
-    // System.out.println(" <-esto el count XXXX");
-
-    // }
-    // return serieRepository.findAll();
-    // }
-
-    /*
-     * @GetMapping("/series")
-     * public ResponseEntity<List<Serie>> getAllSeries() {
-     * //System.out.println("Paso por aqui");
-     * try {
-     * List<Serie> series = new ArrayList<Serie>();
-     * 
-     * //serieRepository.findAll().forEach(series::add);
-     * series = serieRepository.findAll();
-     * if (series.isEmpty()) {
-     * //System.out.println(series.toString());
-     * return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-     * }
-     * //System.out.println(series.toString());
-     * 
-     * return new ResponseEntity<>(series, HttpStatus.OK);
-     * } catch (Exception e) {
-     * return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-     * }
-     * }
-     */
 
     @GetMapping("/series")
     public ResponseEntity<List<InfoSerie>> getAllSeries() {
@@ -103,51 +67,13 @@ public class SerieController {
         }
     }
 
-    // @GetMapping("/series")
-    // public ResponseEntity<List<Serie>> getAllSeries(@RequestParam(required =
-    // false) String title) {
-    // try {
-    // List<Serie> series = new ArrayList<Serie>();
-
-    // if (title == null)
-    // serieRepository.findAll().forEach(series::add);
-    // else
-    // serieRepository.findByTitleContainingIgnoreCase(title).forEach(series::add);
-    // // serieRepository.findAll().forEach(series::add);
-    // if (series.isEmpty()) {
-    // return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    // }
-
-    // return new ResponseEntity<>(series, HttpStatus.OK);
-    // } catch (Exception e) {
-    // return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-    // }
-    // }
-
-    // @GetMapping("/series/novedades")
-    // public ResponseEntity<List<Serie>> getAllSeriesNew() {
-    // try {
-    // List<Serie> series = new ArrayList<Serie>();
-
-    // serieRepository.findByYearendIsNull().forEach(series::add);
-
-    // if (series.isEmpty()) {
-    // return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    // }
-
-    // return new ResponseEntity<>(series, HttpStatus.OK);
-    // } catch (Exception e) {
-    // return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-    // }
-    // }
-
     @GetMapping("/series/novedades")
     public ResponseEntity<List<InfoAbreviada>> getAllSeriesNovedosas() {
         try {
             List<InfoAbreviada> series = new ArrayList<InfoAbreviada>();
             series = serieService.getAllSeriesNovedosas();
 
-            // if (peliculas.isEmpty()) {
+            // if (series.isEmpty()) {
             // return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             // }
 
@@ -164,7 +90,7 @@ public class SerieController {
             List<InfoAbreviada> series = new ArrayList<InfoAbreviada>();
             series = serieService.getAllSeriesNovedosas2();
 
-            // if (peliculas.isEmpty()) {
+            // if (series.isEmpty()) {
             // return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             // }
 
@@ -186,56 +112,49 @@ public class SerieController {
 
     }
 
-    // @GetMapping("/series/{id}")
-    // public ResponseEntity<Serie> getSerieById(@PathVariable("id") long id) {
-    // Serie serieData = serieService.getSerieById(id);
-    // return new ResponseEntity<>(serieData, HttpStatus.OK);
-    // }
+    @PostMapping("/series")
+    public ResponseEntity<Serie> createSerie(@RequestBody SerieNewDTO serie_body) {
+        try {
+            // Serie _Serie = SerieService
+            // .save(new Serie(Serie.getTitle(), Serie.getDescription(), false));
+            SerieNewDTO datosSerie = new SerieNewDTO(
+                    serie_body.getUrl(),
+                    serie_body.getImgURL(),
+                    serie_body.getTitle(),
+                    serie_body.getDescription(),
+                    serie_body.getYearStart(),
+                    serie_body.getYearEnd(),
+                    serie_body.getSeasons());
+            // serie_body.getCast());
+            System.out.println("Controller:Esto es la serie = " + (serie_body.toString()));
+            System.out.println("Controller:serie procesada = " + (datosSerie.toString()));
 
-    // @GetMapping("/series/{id}")
-    // public ResponseEntity<List<Serie>> getSerieById(@PathVariable String id) {
-    // try {
-    // List<Serie> series = new ArrayList<Serie>();
+            Serie _serie = serieService.crear(datosSerie);
+            // Serie _serie = null;
+            return new ResponseEntity<>(_serie, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
-    // serieRepository.findById(Integer.parseInt(id)).forEach(series::add);
+    @DeleteMapping("/series/{id}")
+    public void deleteSerie(@PathVariable("id") long id) {
+        serieRepository.deleteById(id);
+    }
 
-    // if (series.size() == 0) {
+    @PutMapping("/series/{id}")
+    public ResponseEntity<InfoSerie> updateSerie(@PathVariable("id") long id,
+            @RequestBody InfoSerie serie_body) {
+        try {
 
-    // throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La serie no
-    // existe");
-    // }
-
-    // return new ResponseEntity<>(series, HttpStatus.OK);
-    // } catch (Exception e) {
-    // return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-    // }
-    // }
-
-    // @GetMapping("/series/{id}")
-    // public ResponseEntity<Serie> getSerieById(@PathVariable("id") long id)
-    // {
-    // Optional<Serie> serieData = serieRepository.findById(id);
-
-    // if (serieData.isPresent()) {
-    // return new ResponseEntity<>(serieData.get(), HttpStatus.OK);
-    // } else {
-    // return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    // }
-    // }
-
-    /*
-     * @PostMapping("/series")
-     * public ResponseEntity<Serie> createSerie(@RequestBody Serie
-     * Serie) {
-     * try {
-     * Serie _Serie = SerieRepository.save(new
-     * Serie(Serie.getTitle(), Serie.getDescription(), false));
-     * return new ResponseEntity<>(_Serie, HttpStatus.CREATED);
-     * } catch (Exception e) {
-     * return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-     * }
-     * }
-     */
+            System.out.println("Controller:Esto es la serie = " + (serie_body.toString()));
+            ResponseEntity<InfoSerie> _infoSerie = serieService.actualizar(id, serie_body);
+            // Serie _serie = null;
+            return _infoSerie;
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     /*
      * @PutMapping("/series/{id}")
@@ -266,19 +185,6 @@ public class SerieController {
      * } catch (Exception e) {
      * return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
      * }
-     * }
-     */
-
-    /*
-     * @DeleteMapping("/series")
-     * public ResponseEntity<HttpStatus> deleteAllSeries() {
-     * try {
-     * SerieRepository.deleteAll();
-     * return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-     * } catch (Exception e) {
-     * return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-     * }
-     * 
      * }
      */
 
