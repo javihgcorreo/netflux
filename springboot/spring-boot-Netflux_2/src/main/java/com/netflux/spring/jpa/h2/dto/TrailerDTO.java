@@ -20,7 +20,8 @@ public class TrailerDTO {
     // otros métodos
 
     public Long convertirStringToLong(String valor) {
-        try {
+        try {// si en el Trailer.java (model) asigno en el constructor id=0L no me hace
+             // falta, y solo uso parseLong<
             return Long.parseLong(valor);
         } catch (NumberFormatException e) {
             // Si ocurre una excepción, significa que el valor no es un número válido

@@ -87,6 +87,7 @@ public class TrailerService {
             Trailer trailerExistente = trailerExistenteOpcional.orElse(new Trailer()); // Si está vac
 
             trailerExistente = trailerActualizada.toTrailer();
+            trailerExistente.setId(id);
 
             return new ResponseEntity<>((trailerRepository.save(trailerExistente)).toTrailerDTOSinInfocast(),
                     HttpStatus.OK);
