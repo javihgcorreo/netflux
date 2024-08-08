@@ -67,11 +67,11 @@ public class SerieController {
         }
     }
 
-    @GetMapping("/series/novedades")
-    public ResponseEntity<List<InfoAbreviada>> getAllSeriesNovedosas() {
+    @GetMapping("/series/novedades2")
+    public ResponseEntity<List<InfoAbreviada>> getAllSeriesNovedosas2() {// este codigo era cuando usaba relacion 1a1
         try {
             List<InfoAbreviada> series = new ArrayList<InfoAbreviada>();
-            series = serieService.getAllSeriesNovedosas();
+            series = serieService.getAllSeriesNovedosas2();
 
             // if (series.isEmpty()) {
             // return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -84,11 +84,11 @@ public class SerieController {
         }
     }
 
-    @GetMapping("/series/novedades2")
-    public ResponseEntity<List<InfoAbreviada>> getAllSeriesNovedosas2() {
+    @GetMapping("/series/novedades")
+    public ResponseEntity<List<InfoAbreviada>> getAllSeriesNovedosas() {// este actual para generalización
         try {
             List<InfoAbreviada> series = new ArrayList<InfoAbreviada>();
-            series = serieService.getAllSeriesNovedosas2();
+            series = serieService.getAllSeriesNovedosas();
 
             // if (series.isEmpty()) {
             // return new ResponseEntity<>(HttpStatus.NO_CONTENT);

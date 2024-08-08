@@ -97,7 +97,7 @@ public class SerieService {
     // return serieRepository.findAll();
     // }
 
-    public List<InfoAbreviada> getAllSeriesNovedosas2() {
+    public List<InfoAbreviada> getAllSeriesNovedosas() {// este actual para generalización
 
         // Series
         // Novedades-----------------------------------------------------------------
@@ -120,7 +120,7 @@ public class SerieService {
         return infoAbreviadasObjects;
     }
 
-    public List<InfoAbreviada> getAllSeriesNovedosas() {
+    public List<InfoAbreviada> getAllSeriesNovedosas2() {// este codigo era cuando usaba relacion 1a1
 
         // Series
         // Novedades-----------------------------------------------------------------

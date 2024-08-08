@@ -8,6 +8,7 @@ import Sidebar from './components/Sidebar';
 import SidebarDestacados from './components/SidebarDestacados';
 import SidebarTrailers from './components/SidebarTrailers';
 import PeliculasNovedosas from './components/PeliculasNovedosas';
+import SeriesNovedosas from './components/SeriesNovedosas';
 
 function App() {
   return (
@@ -67,11 +68,10 @@ function App() {
         <div id="cuerpo_productos" className="row mt-4">
             <div id="productos" className="col-lg-8">
                 <div id="pelisNuevas" className="row">
-                  <p>peliculas nuevas</p>
-                  <PeliculasNovedosas/>
+                    <PeliculasNovedosas/>
                 </div>
                 <div id="seriesNuevas" className="row">
-                   <p>series nuevas</p>
+                    <SeriesNovedosas/>
                 </div>
             </div>
 
