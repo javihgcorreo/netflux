@@ -1,0 +1,24 @@
+Problemas
+numero =    1       Solucionado = NO      
+
+descripcion
+-----------
+Con los id's auto, empiezan en 1 y si hay datos tienes que ir ascendiento con inserts hasta llegar donde hay hueco
+
+Solucion
+--------
+Colocar en cada table un indice por donde va
+
+*fin problema 1***************************************************************************
+
+numero =    2      Solucionado = NO      
+
+descripcion
+-----------
+El put (actualizar). Si solo quieres actualizar y no encuentra el id, crea uno nuevo por qué usa save
+Solucion
+--------
+El service de cada uno, cuando busque con find el registro en la BBDD y no lo encuentre no seguir y devolver error
+
+*fin problema 2***************************************************************************
+

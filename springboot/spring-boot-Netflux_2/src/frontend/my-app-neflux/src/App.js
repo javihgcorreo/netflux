@@ -5,7 +5,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import Greeting from './components/Greeting';
 import Sidebar from './components/Sidebar';
-import Sidebar1 from './components/Sidebar1';
+import SidebarDestacados from './components/SidebarDestacados';
+import SidebarTrailers from './components/SidebarTrailers';
+import PeliculasNovedosas from './components/PeliculasNovedosas';
 
 function App() {
   return (
@@ -66,13 +68,14 @@ function App() {
             <div id="productos" className="col-lg-8">
                 <div id="pelisNuevas" className="row">
                   <p>peliculas nuevas</p>
+                  <PeliculasNovedosas/>
                 </div>
                 <div id="seriesNuevas" className="row">
                    <p>series nuevas</p>
                 </div>
             </div>
 
-            <Sidebar1 />
+            <Sidebar />
 
         </div>
     </div>

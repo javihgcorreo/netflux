@@ -5,7 +5,7 @@ Javier Hernández García
 MA UA Inge. Informática
 DSAI
 
-Práctica 2: Microservicio con Spring Boot
+Práctica Final: Microservicio con Spring Boot Backend y Frontend
 
 el proyecto es spring boot 3.1.0
 usa maven
@@ -39,3 +39,4 @@ Password:
 
 Y faltaria poner el frontend con la practica 1 en:
     \public
+
