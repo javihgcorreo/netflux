@@ -68,3 +68,11 @@ insert into PELICULASNOVEDADES (FK_PELICULAS_ID )
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:842)
+2024-08-08 22:24:26 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'' (SERIES: ""ID"" BIGINT NOT NULL)"
+Data conversion error converting "'' (SERIES: ""ID"" BIGINT NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."SERIES"("ID","DESCRIPTION","IMG_URL","SEASONS","TITLE","URL","YEAREND","YEARSTART")VALUES(?,?,?,?,?,?,?,?) [22018-214]
+2024-08-08 22:24:26 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'' (SERIES: ""ID"" BIGINT NOT NULL)"
+Data conversion error converting "'' (SERIES: ""ID"" BIGINT NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."SERIES"("ID","DESCRIPTION","IMG_URL","SEASONS","TITLE","URL","YEAREND","YEARSTART")VALUES(?,?,?,?,?,?,?,?) [22018-214]
